@@ -7,7 +7,7 @@ categories:
 comments: true
 date: 2012-10-25T00:00:00Z
 title: Django show sql query in shell
-url: /blog/2012/10/25/django-show-sql-query-in-shell/
+url: /blog/2012/10/25/django-show-sql-query-in-shell.html
 ---
 
 To show sql query in `python manage.py shell`, we use this code

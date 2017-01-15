@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-29T00:00:00Z"
 title = "Using selenium with headless browser"
-url = "/blog/2012/06/29/using-selenium-with-headless-browser/"
+url = "/blog/2012/06/29/using-selenium-with-headless-browser.html"
 image = "images/post/server.jpg"
 draft = false
 tags = ["testing", "python"]

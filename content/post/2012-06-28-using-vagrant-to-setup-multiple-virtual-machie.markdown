@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-28T00:00:00Z"
 title = "Using vagrant to setup multiple virtual machine"
-url = "/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie/"
+url = "/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie.html"
 image = "images/post/server.jpg"
 draft = false
 tags = ["server", "vagrant", "virtual machine"]

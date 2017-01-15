@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-18T00:00:00Z"
 title = "Set up development environment with Vagrant"
-url = "/blog/2012/06/18/install-virtual-machine-with-vagrant/"
+url = "/blog/2012/06/18/install-virtual-machine-with-vagrant.html"
 image = "images/post/server.jpg"
 draft = false
 tags = ["server", "vagrant", "virtual machine"]

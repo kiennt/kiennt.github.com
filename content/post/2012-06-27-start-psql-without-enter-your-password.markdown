@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-27T00:00:00Z"
 title = "Start psql without enter password"
-url = "/blog/2012/06/27/start-psql-without-enter-your-password/"
+url = "/blog/2012/06/27/start-psql-without-enter-your-password.html"
 image = "images/post/startup.jpg"
 draft = false
 tags = ["tips", "server", "database", "postgresql"]

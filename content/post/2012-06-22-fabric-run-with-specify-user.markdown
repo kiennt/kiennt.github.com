@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-22T00:00:00Z"
 title = "Fabric run remote with specify user on a hostname"
-url = "/blog/2012/06/22/fabric-run-with-specify-user/"
+url = "/blog/2012/06/22/fabric-run-with-specify-user.html"
 image = "images/post/python-object-and-dictionary-convertion.jpg"
 tags = ["tips"]
 comments = true

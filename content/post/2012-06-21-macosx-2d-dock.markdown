@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-21T00:00:00Z"
 title = "Mac OSX Lion with 2D Dock"
-url = "/blog/2012/06/21/macosx-2d-dock/"
+url = "/blog/2012/06/21/macosx-2d-dock.html"
 image = "images/post/python-object-and-dictionary-convertion.jpg"
 tags = ["tips"]
 comments = true

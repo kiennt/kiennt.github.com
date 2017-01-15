@@ -5,7 +5,7 @@ categories:
 comments: true
 date: 2012-06-30T00:00:00Z
 title: VIM with regex
-url: /blog/2012/06/30/regex-in-vim/
+url: /blog/2012/06/30/regex-in-vim.html
 ---
 
 Regular expression in VIM, you can specify a regex group by `\(` and `\)`.

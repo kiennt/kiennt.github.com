@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-16T00:00:00Z"
 title = "Weird behavior of nosetest"
-url = "/blog/2012/06/16/weird-behavior-with-nosetest/"
+url = "/blog/2012/06/16/weird-behavior-with-nosetest.html"
 image = "images/post/work-around.jpg"
 draft = false
 tags = ["python", "programming"]

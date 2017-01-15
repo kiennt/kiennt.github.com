@@ -7,7 +7,7 @@ categories:
 comments: true
 date: 2012-11-07T00:00:00Z
 title: Running celery task synchronous when testing django app
-url: /blog/2012/11/07/run-celery-task-synchronous-when-testing-django/
+url: /blog/2012/11/07/run-celery-task-synchronous-when-testing-django.html
 ---
 
 Celery support running task synchronous by config variable `CELERY_ALWAYS_EAGER`.

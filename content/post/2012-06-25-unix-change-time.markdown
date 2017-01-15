@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-25T00:00:00Z"
 title = "Change LINUX timezone and datetime"
-url = "/blog/2012/06/25/unix-change-time/"
+url = "/blog/2012/06/25/unix-change-time.html"
 image = "images/post/timezone.jpg"
 draft = false
 tags = ["server"]

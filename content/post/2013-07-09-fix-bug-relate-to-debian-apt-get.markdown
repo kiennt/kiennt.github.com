@@ -6,7 +6,7 @@ categories:
 comments: true
 date: 2013-07-09T00:00:00Z
 title: apt-get install failed
-url: /blog/2013/07/09/fix-bug-relate-to-debian-apt-get/
+url: /blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html
 ---
 
 Today, when setting up my debian server, I get this error

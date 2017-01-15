@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-25T00:00:00Z"
 title = "Config virtual host with NGINX in DEBIAN"
-url = "/blog/2012/06/25/config-virtualhost-with-nginx/"
+url = "/blog/2012/06/25/config-virtualhost-with-nginx.html"
 image = "images/post/server.jpg"
 draft = false
 tags = ["server"]

@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2014-03-28T00:00:00Z"
 title = "Hacking pinterest android app"
-slug = "/blog/2014/03/28/hacking-pinterest.html"
+url = "/blog/2014/03/28/hacking-pinterest.html"
 tags = ["hacking"]
 comments = true
 share = true

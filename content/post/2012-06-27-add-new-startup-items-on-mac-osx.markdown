@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-27T00:00:00Z"
 title = "Add new startup items on Mac OSX"
-url = "/blog/2012/06/27/add-new-startup-items-on-mac-osx/"
+url = "/blog/2012/06/27/add-new-startup-items-on-mac-osx.html"
 image = "images/post/startup.jpg"
 draft = false
 tags = ["server", "booting", "macosx"]

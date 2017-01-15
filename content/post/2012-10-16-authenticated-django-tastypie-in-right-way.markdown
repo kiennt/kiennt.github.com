@@ -7,7 +7,7 @@ categories:
 comments: true
 date: 2012-10-16T00:00:00Z
 title: Authentication django-tastypie in right way
-url: /blog/2012/10/16/authenticated-django-tastypie-in-right-way/
+url: /blog/2012/10/16/authenticated-django-tastypie-in-right-way.html
 ---
 
 When using django-tastypie, I got some problems with security.

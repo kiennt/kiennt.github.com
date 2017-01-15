@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-19T08:00:00Z"
 title = "Using deamon tools to make process keep alive"
-url = "/blog/2012/06/19/manager-daemon-process-with-daemon-tools/"
+url = "/blog/2012/06/19/manager-daemon-process-with-daemon-tools.html"
 image = "images/post/startup.jpg"
 draft = false
 tags = ["server"]

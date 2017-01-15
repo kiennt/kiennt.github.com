@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-29T00:00:00Z"
 title = "Run program in UNIX and make pidfile for it"
-url = "/blog/2012/06/29/run-program-and-generate-pid/"
+url = "/blog/2012/06/29/run-program-and-generate-pid.html"
 image = "images/post/server.jpg"
 draft = false
 tags = ["tips", "server"]

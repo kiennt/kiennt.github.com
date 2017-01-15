@@ -6,7 +6,7 @@ categories:
 comments: true
 date: 2012-08-03T00:00:00Z
 title: Mysql without password
-url: /blog/2012/08/03/mysqldump-without-password/
+url: /blog/2012/08/03/mysqldump-without-password.html
 ---
 
 When dealing with database, sometime we want to make backup database.

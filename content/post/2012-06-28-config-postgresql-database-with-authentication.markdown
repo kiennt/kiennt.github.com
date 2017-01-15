@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-28T00:00:00Z"
 title = "Config PostgreSQL database with authentication"
-url = "/blog/2012/06/28/config-postgresql-database-with-authentication/"
+url = "/blog/2012/06/28/config-postgresql-database-with-authentication.html"
 image = "images/post/startup.jpg"
 draft = false
 tags = ["tips", "server", "database", "postgresql"]

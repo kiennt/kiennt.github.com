@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-19T00:00:00Z"
 title = "Debian run script at startup time"
-url = "/blog/2012/06/19/debian-run-script-at-startup/"
+url = "/blog/2012/06/19/debian-run-script-at-startup.html"
 image = "images/post/startup.jpg"
 draft = false
 tags = ["server", "debian"]

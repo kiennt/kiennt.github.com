@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-23T00:00:00Z"
 title = "Weeken with python (part 3)"
-url = "/blog/2012/06/23/weekend-with-python-part3/"
+url = "/blog/2012/06/23/weekend-with-python-part3.html"
 image = "images/post/python-weekend.jpg"
 draft = false
 tags = ["python", "programming"]

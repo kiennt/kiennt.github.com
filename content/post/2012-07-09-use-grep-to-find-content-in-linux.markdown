@@ -5,7 +5,7 @@ categories:
 comments: true
 date: 2012-07-09T00:00:00Z
 title: Use `grep` command to find content in Linux
-url: /blog/2012/07/09/use-grep-to-find-content-in-linux/
+url: /blog/2012/07/09/use-grep-to-find-content-in-linux.html
 ---
 
 ```bash

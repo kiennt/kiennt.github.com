@@ -2,7 +2,7 @@
 author = "kiennt"
 date = "2012-06-23T00:00:00Z"
 title = "Python object model"
-url = "/blog/2012/06/23/python-object-models/"
+url = "/blog/2012/06/23/python-object-models.html"
 image = "images/post/python-object-and-dictionary-convertion.jpg"
 tags = ["python", "programming"]
 comments = true

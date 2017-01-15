@@ -6,7 +6,7 @@ categories:
 comments: true
 date: 2013-03-13T00:00:00Z
 title: How to deploy a feature branch to heroku
-url: /blog/2013/03/13/how-to-deploy-a-branch-to-heroku/
+url: /blog/2013/03/13/how-to-deploy-a-branch-to-heroku.html
 ---
 
 We often have many issues/feature which need to fix/enhance/add.

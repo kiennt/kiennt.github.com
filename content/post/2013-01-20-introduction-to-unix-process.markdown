@@ -5,7 +5,7 @@ categories:
 comments: true
 date: 2013-01-20T00:00:00Z
 title: Giới thiệu về Unix process (vietnamese)
-url: /blog/2013/01/20/introduction-to-unix-process/
+url: /blog/2013/01/20/introduction-to-unix-process.html
 ---
 
 Là một kỹ sư lập trình hệ thống, một server guy, hay là một sys admin, sys dev,

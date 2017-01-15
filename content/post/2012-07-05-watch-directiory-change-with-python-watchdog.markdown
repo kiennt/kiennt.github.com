@@ -6,7 +6,7 @@ categories:
 comments: true
 date: 2012-07-05T00:00:00Z
 title: Watch directory change with Python watchdog library
-url: /blog/2012/07/05/watch-directiory-change-with-python-watchdog/
+url: /blog/2012/07/05/watch-directiory-change-with-python-watchdog.html
 ---
 
 Watchdog is Python API and shell utilities to monitor file system events.
