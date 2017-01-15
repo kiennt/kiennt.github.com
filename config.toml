@@ -1,0 +1,52 @@
+baseUrl= "http://kiennt.com/"
+LanguageCode= "en-ES"
+Title= ""
+DisqusShortname = "kntheroku"
+Copyright = "2017"
+
+paginate = 5
+canonifyurls = true
+
+
+# ===========================================================================
+# pygments configuration
+# ===========================================================================
+# Keep it as false please, the css file contains the code for highlighting
+pygmentsuseclasses = false
+
+# If nothing is set, then solarized_light is used
+# Other styles can be viewed in [http://pygments.org/](http://pygments.org/)
+pygmentsstyle = "solarized"
+
+# Highlight shortcode and code fences (```) will be treated similarly
+pygmentscodefences = true
+
+# pygments options can be added here
+# Hugo supports these pygments options: style, encoding, noclasses, hl_lines, linenos
+# pygmentsoptions = "linenos=true"
+
+
+[params]
+  description = "Hapiness is love what you do"
+  cover = "images/cover.jpg"
+  author = "Kien Nguyen"
+  authorlocation = "Ho Chi Minh, Vietnam"
+  authorwebsite = "http://kiennt.com"
+  bio = "A father, husband, and passinate programmer"
+  logo = "images/kiennt.jpg"
+  googleAnalyticsUserID = "UA-16274581-6"
+  # Optional RSS-Link, if not provided it defaults to the standard index.xml
+  # RSSLink = "http://feeds.feedburner.com/..."
+  githubName = "kiennt"
+  twitterName = "5primes"
+  # facebookName = ""
+  # linkedinName = ""
+
+  # set true if you are not proud of using Hugo (true will hide the footer note "Proudly published with HUGO.....")
+  hideHUGOSupport = false
+  [params.social]
+    twitter = "5primes"
+
+[indexes]
+  tag = "tags"
+  category = "categories"
