@@ -38,14 +38,14 @@ pygmentscodefences = true
   # Optional RSS-Link, if not provided it defaults to the standard index.xml
   # RSSLink = "http://feeds.feedburner.com/..."
   githubName = "kiennt"
-  twitterName = "5primes"
+  twitterName = "kiennt"
   # facebookName = ""
   # linkedinName = ""
 
   # set true if you are not proud of using Hugo (true will hide the footer note "Proudly published with HUGO.....")
   hideHUGOSupport = false
   [params.social]
-    twitter = "5primes"
+    twitter = "kiennt"
 
 [indexes]
   tag = "tags"
