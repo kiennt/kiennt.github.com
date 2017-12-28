@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/server.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Set up development environment with Vagrant"/>
+<meta name="twitter:description" content="When you join a new company, to start to contribute to the code base, you will need
+to set up a development environment on your local machine. Most of the time,
+the team will give you the bootstrap script to do that. But sometimes, that
+magical script does not exist, and that is the time you know you should introduce
+the team your bootstrap script. In this article, I shared what I learned
+while building a script by using Vagrant.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Set up development environment with Vagrant &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-18T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="server" />
+    
+    <meta property="og:article:tag" content="vagrant" />
+    
+    <meta property="og:article:tag" content="virtual machine" />
+    
+    
+
+    <title>
+       Set up development environment with Vagrant &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/server.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Set up development environment with Vagrant</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-18T00:00:00Z">
+            Jun 18, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/server/">#server</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/vagrant/">#vagrant</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/virtual-machine/">#virtual machine</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>When you join a new company, to start to contribute to the code base, you will need
+to set up a development environment on your local machine. Most of the time,
+the team will give you the <code>bootstrap</code> script to do that. But sometimes, that
+magical script does not exist, and that is the time you know you should introduce
+the team your <code>bootstrap</code> script. In this article, I shared what I learned
+while building a script by using Vagrant.</p>
+
+<p></p>
+
+<h3 id="vagrant">Vagrant</h3>
+
+<p><a href="http://vagrantup.com/">Vagrant</a> is a ruby-based tool to manage virtual machines.
+Vagrant using <a href="https://www.virtualbox.org/">Virtual-box</a> underlying.</p>
+
+<p>This tool helps create many virtual machines easily. If you want to read more about vagrant, you should go to <a href="http://vagrantup.com">vagrant home page</a>.</p>
+
+<p>To install vagrant in Mac OSX, firstly you need to install RUBY.
+I recommend you should using <code>rvm</code> when using ruby.</p>
+
+<p>To install <code>rvm</code>, you need <code>gcc</code> which already is installed when we install Xcode.
+In this case, I use Xcode 4.3.3 from Apple Store.
+But after getting Xcode, I did not find out <code>gcc</code>. To fixed it, open Xcode 4.3.3,
+go to Preferences -&gt; Downloads -&gt; Choose install &ldquo;Commandline tool for Xcode&rdquo;.
+After it finishs, you got your magical GCC :-).</p>
+
+<p>Next step is install <code>rvm</code>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; curl -L https://get.rvm.io | bash -s stable --ruby
+$&gt; <span style="color:#fff;font-weight:bold">source</span> ~/.rvm/scripts/rvm
+$&gt; rvm install <span style="color:#ff0;font-weight:bold">1</span>.9.3
+$&gt; gem install vagrant</code></pre></div>
+<p>Cool!!! Next we setup vagrant.</p>
+
+<p>Vagrant use <code>boxes</code> to create VM. Boxes can download from <a href="http://vagrantbox.es">http://vagrantbox.es</a>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; vagrant box add debian-squeeze-32 http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box</code></pre></div>
+<p>Vagrant divides virtual machines to many projects. Each project can contain many machines. Each project is a store in a configuration file <code>Vagrantfile</code>:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; mkdir debian
+$&gt; <span style="color:#fff;font-weight:bold">cd</span> debian
+$&gt; vagrant init</code></pre></div>
+<p>A <code>Vagrantfile</code> has been placed in this directory. You are now
+ready to <code>vagrant up</code> your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+<code>vagrantup.com</code> for more information on using Vagrant.</p>
+
+<p>Now change <code>Vagrantfile</code> to set up our new virtual machine.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">Vagrant::Config.run <span style="color:#fff;font-weight:bold">do</span> |config|
+  <span style="color:#007f7f"># using debian as virtual environment to build</span>
+  config.vm.box = <span style="color:#0ff;font-weight:bold">&#39;debian&#39;</span>
+
+  <span style="color:#007f7f"># Share an additional folder to the guest VM. The first argument is</span>
+  <span style="color:#007f7f"># an identifier, the second is the path on the guest to mount the</span>
+  <span style="color:#007f7f"># folder, and the third is the path on the host to the actual folder.</span>
+  config.vm.share_folder <span style="color:#0ff;font-weight:bold">&#34;srv&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;/srv&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;/Users/knt/srv&#34;</span>
+
+  <span style="color:#007f7f"># Forward guest port 80 to host port 4567</span>
+  <span style="color:#007f7f"># forward_port is a method which takes two arguments:</span>
+  <span style="color:#007f7f">#   + guest port - The port on the virtual machine.</span>
+  <span style="color:#007f7f">#   + host port - The port on your local machine you want</span>
+  <span style="color:#007f7f"># to use to access the guest port.</span>
+  config.vm.forward_port <span style="color:#ff0;font-weight:bold">80</span>, <span style="color:#ff0;font-weight:bold">4567</span>
+
+  <span style="color:#007f7f"># Config virtual machine memory</span>
+  config.vm.customize [<span style="color:#0ff;font-weight:bold">&#34;modifyvm&#34;</span>, <span style="color:#0ff;font-weight:bold">:id</span>, <span style="color:#0ff;font-weight:bold">&#34;--memory&#34;</span>, <span style="color:#ff0;font-weight:bold">512</span>]
+<span style="color:#fff;font-weight:bold">end</span></code></pre></div>
+<p>After modifying <code>Vagrantfile</code>, it is time to create our first virtual environment.
+NOTE: More details about Vagrantfile configuration, please take a look at
+<a href="http://vagrantup.com/v1/docs/vagrantfile.html">vagrant document</a>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; vagrant up
+[default] Importing base box <span style="color:#0ff;font-weight:bold">&#39;debian&#39;</span>...
+[default] The guest additions on this VM <span style="color:#fff;font-weight:bold">do</span> not match the install version of
+VirtualBox! This may cause things such as forwarded ports, shared
+folders, and more to not work properly. If any of those things fail on
+this machine, please update the guest additions and repackage the
+box.
+
+Guest Additions Version: <span style="color:#ff0;font-weight:bold">4</span>.0.4
+VirtualBox Version: <span style="color:#ff0;font-weight:bold">4</span>.1.16
+[default] Matching MAC address <span style="color:#fff;font-weight:bold">for</span> NAT networking...
+[default] Clearing any previously <span style="color:#fff;font-weight:bold">set</span> forwarded ports...
+[default] Forwarding ports...
+[default] -- 22 =&gt; <span style="color:#ff0;font-weight:bold">2222</span> (adapter <span style="color:#ff0;font-weight:bold">1</span>)
+[default] -- 80 =&gt; <span style="color:#ff0;font-weight:bold">4567</span> (adapter <span style="color:#ff0;font-weight:bold">1</span>)
+[default] Creating shared folders metadata...
+[default] Clearing any previously <span style="color:#fff;font-weight:bold">set</span> network interfaces...
+[default] Booting VM...
+[default] Waiting <span style="color:#fff;font-weight:bold">for</span> VM to boot. This can take a few minutes.
+[default] VM booted and ready <span style="color:#fff;font-weight:bold">for</span> use!
+[default] Mounting shared folders...
+[default] -- srv: /srv
+[default] -- v-root: /vagrant</code></pre></div>
+<p>Finally, we have our <code>debian</code> machine. Let ssh to it</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; vagrant ssh
+Linux vagrant-debian-squeeze <span style="color:#ff0;font-weight:bold">2</span>.6.32-5-686 <span style="color:#007f7f">#1 SMP Wed Jan 12 04:01:41 UTC 2011 i686
+</span><span style="color:#007f7f"></span>
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms <span style="color:#fff;font-weight:bold">for</span> each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Feb <span style="color:#ff0;font-weight:bold">24</span> <span style="color:#ff0;font-weight:bold">07</span>:02:08 <span style="color:#ff0;font-weight:bold">2011</span> from <span style="color:#ff0;font-weight:bold">10</span>.0.2.2
+vagrant@vagrant-debian-squeeze:~$</code></pre></div>
+<p>Cool !!!. Let &rsquo;s config it to code</p>
+
+<h3 id="config-virtual-machine">Config virtual machine</h3>
+
+<h4 id="set-up-utility-tools">Set up utility tools</h4>
+
+<p>Firstly, vagrant let us ssh to VM without a password. To make our own password on
+VM, we change &lsquo;root&rsquo; and &lsquo;vagrant&rsquo; user password</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; sudo passwd <span style="color:#007f7f"># change root password
+</span><span style="color:#007f7f"></span>$&gt; sudo passwd vagrant # chang vagrant password</code></pre></div>
+<p>Next, install my must have editor &ldquo;vim&rdquo;.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; sudo apt-get install vim</code></pre></div>
+<h4 id="change-the-hostname">Change the hostname</h4>
+
+<p>Honestly, I do not like the name &ldquo;vagrant-debian-squeeze&rdquo;.
+It &rsquo;s too long to remember. I just want to change it &ldquo;debian&rdquo;
+&ldquo;vagrant-debian-squeeze&rdquo; is &ldquo;hostname&rdquo; of VM. To change it in debian,
+we using bellow command:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; vim /etc/hostname
+<span style="color:#007f7f"># Change to hostname to &#34;debian&#34;
+</span><span style="color:#007f7f"></span>
+$&gt; vim /etc/hosts
+<span style="color:#007f7f"># Add new line
+</span><span style="color:#007f7f"></span><span style="color:#ff0;font-weight:bold">127</span>.0.0.1   debian
+<span style="color:#007f7f"># we add this line to solve issue &#34;unable to resolve hostname&#34;
+</span><span style="color:#007f7f"></span>
+<span style="color:#007f7f"># Make it active in next login session
+</span><span style="color:#007f7f"></span>$&gt; /etc/init.d/hostname.sh start</code></pre></div>
+<h4 id="add-source-list">Add source.list</h4>
+
+<p>Change file /etc/apt/source.list as below</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">deb http://virror.hanoilug.org/debian/archive squeeze main contrib <span style="color:#007f7f">#non-free
+</span><span style="color:#007f7f"></span>deb http://virror.hanoilug.org/debian/archive squeeze-updates main <span style="color:#007f7f">#non-free contrib
+</span><span style="color:#007f7f"></span>deb http://virror.hanoilug.org/debian/security squeeze/updates main <span style="color:#007f7f">#non-free contrib
+</span><span style="color:#007f7f"></span>deb http://virror.hanoilug.org/debian/backports squeeze-backports main <span style="color:#007f7f">#non-free contrib
+</span><span style="color:#007f7f"></span>
+deb http://mirror.bytemark.co.uk/debian/ squeeze main
+deb-src http://mirror.bytemark.co.uk/debian/ squeeze main
+
+deb http://security.debian.org/ squeeze/updates main
+deb-src http://security.debian.org/ squeeze/updates main
+
+deb http://mirror.bytemark.co.uk/debian/ squeeze-updates main
+deb-src http://mirror.bytemark.co.uk/debian/ squeeze-updates main
+
+
+deb http://ftp.us.debian.org/debian testing main</code></pre></div>
+<p>Update source.list (NOTE: I logged  in as root to reduce typing :P).</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; apt-get update</code></pre></div>
+<h4 id="install-necessary-tools">Install necessary tools</h4>
+
+<p>Install gcc and python.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; apt-get install gcc
+$&gt; apt-get install python2.7 python-psutil python-psycopg2 python-pylibmc python-setproctitle
+
+<span style="color:#007f7f">## install pip tool
+</span><span style="color:#007f7f"></span>$&gt; apt-get install python-pip
+
+<span style="color:#007f7f">## update pip
+</span><span style="color:#007f7f"></span>$&gt; pip install update
+$&gt; pip install -r requirements.txt</code></pre></div>
+<p>Install <code>udpatedb</code> and <code>locate</code> tool</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; apt-get install locate</code></pre></div>
+<p>Install <code>svn</code> and <code>git</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; apt-get install subversion git</code></pre></div>
+<h4 id="resolve-locate">Resolve locate</h4>
+
+<p>Edit <code>/etc/locale.gen</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; <span style="color:#fff;font-weight:bold">echo</span> en_US.UTF-8 UTF-8 &gt; /etc/locale.gen
+$&gt; <span style="color:#fff;font-weight:bold">echo</span> en_ES.UTF-8 UTF-8 &gt;&gt; /etc/locale.gen
+$&gt; <span style="color:#fff;font-weight:bold">echo</span> en_GB.UTF-8 UTF-8 &gt;&gt; /etc/locale.gen
+$&gt; locale-gen</code></pre></div>
+<h4 id="install-python-postgresql">Install python PostgreSQL</h4>
+
+<p>I got this error when install psycopg2</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Error: pg_config executable not found.
+
+Please add the directory containing pg_config to the PATH
+
+or specify the full executable path with the option:
+
+    python setup.py build_ext --pg-config /path/to/pg_config build ...
+
+    or with the pg_config option in <span style="color:#0ff;font-weight:bold">&#39;setup.cfg&#39;</span>.
+
+    ----------------------------------------
+    Command python setup.py egg_info failed with error code <span style="color:#ff0;font-weight:bold">1</span> in /srv/svn/build/psycopg2</code></pre></div>
+<p>To pass it, i use solutions from <a href="http://stackoverflow.com/a/5450183/126245">stackoverflow</a></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; apt-get install libpq-dev python-dev
+
+<span style="color:#007f7f">#Reinstall requirements.txt agains, and it works
+</span><span style="color:#007f7f"></span>$&gt; pip install -r requirements.txt</code></pre></div>
+<h4 id="install-postgresql-database">Install PostgreSQL database</h4>
+
+<p>First, install postgresql and postgis</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; apt-get install postgresql
+$&gt; apt-get install postgresql-9.1-postgis postgresql-contrib</code></pre></div>
+<p>Now, let config our PostgreSQL. PostgreSQL 9.1 was locate at /usr/lib/postgres/9.1.
+Logout from &ldquo;root&rdquo; user, and login &ldquo;vagrant&rdquo;, we should add postgres path to our
+system by change ~/.bashrc file</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#fff;font-weight:bold">export</span> PATH=/usr/lib/postgresql/9.1/bin:<span style="color:#0ff;font-weight:bold">\$</span>PATH &gt;&gt; ~/.bashrc
+$&gt; <span style="color:#fff;font-weight:bold">source</span> ~/.bashrc
+
+<span style="color:#007f7f"># check whether path is active by test command createdb
+</span><span style="color:#007f7f"></span>$&gt; createdb
+createdb: could not connect to database postgres: could not connect to server: No such file or directory
+    Is the server running locally and accepting
+        connections on Unix domain socket <span style="color:#0ff;font-weight:bold">&#34;/var/run/postgresql/.s.PGSQL.5432</span></code></pre></div>
+<p>OK, postgres path is working. Now we write some script to control postgres easily.
+NOTE that, to run postgres, you shouldn&rsquo;t run it by &lsquo;root&rsquo; user.
+In my case, i run it with &lsquo;vagrant&rsquo; user.</p>
+
+<p>Write the &lsquo;pg&rsquo; script to control postgres</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; mkdir -p /home/vagrant/postgres/database
+$&gt; mkdir -p /home/vagrant/postgres/log
+$&gt; initdb /home/vagrant/postgres/database
+$&gt; sudo chown vagrant /var/run/postgresql
+$&gt; vim pg
+<span style="color:#0f0;font-weight:bold">#!/usr/bin/env sh
+</span><span style="color:#0f0;font-weight:bold"></span>PROGRAM=pg
+PGCTL=/usr/lib/postgresql/9.1/bin/pg_ctl
+DATAPATH=/home/vagrant/postgres/database
+LOGFILE=/home/vagrant/postgres/log/postgres.9.1.log
+<span style="color:#fff;font-weight:bold">case</span> $1 in
+    start)
+        $PGCTL -D $DATAPATH start <span style="color:#ff0;font-weight:bold">2</span>&gt;&amp;<span style="color:#ff0;font-weight:bold">1</span> &gt; $LOGFILE
+        ;;
+    stop)
+        $PGCTL stop
+        ;;
+    restart)
+        $PGCTL stop
+        <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;Starting postgres server ...&#34;</span>
+        $PGCTL -D $DATAPATH start <span style="color:#ff0;font-weight:bold">2</span>&gt;&amp;<span style="color:#ff0;font-weight:bold">1</span> &gt; $LOGFILE
+        ;;
+    *)
+        <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;USAGE </span>$PROGRAM<span style="color:#0ff;font-weight:bold"> {start|stop|restart}&#34;</span>
+        ;;
+<span style="color:#fff;font-weight:bold">esac</span>
+
+$&gt; chmod +x pg
+$&gt; sudo mv pg /etc/init.d
+$&gt; pg start
+$&gt; createdb checkin_dev</code></pre></div>
+<p>Now, backup database from data.sql and schema.sql files in /srv/config/db.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; psql checkin_dev &lt; schema.sql
+$&gt; psql checkin_dev &lt; data.sql</code></pre></div>
+<p>Or more convention, we should write a script to do all backup database.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#0f0;font-weight:bold">#!/usr/bin/env sh
+</span><span style="color:#0f0;font-weight:bold"></span>dropdb checkin_dev
+createdb checkin_dev
+pgsql checkin_dev &lt; schema.sql
+pgsql checkin_dev &lt; data.sql</code></pre></div>
+<p>That &rsquo;s all for tonight!</p>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Set%20up%20development%20environment%20with%20Vagrant&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f18%2finstall-virtual-machine-with-vagrant.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f18%2finstall-virtual-machine-with-vagrant.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f18%2finstall-virtual-machine-with-vagrant.html&amp;description=Set%20up%20development%20environment%20with%20Vagrant"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f18%2finstall-virtual-machine-with-vagrant.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/18\/install-virtual-machine-with-vagrant.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

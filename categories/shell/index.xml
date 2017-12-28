@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shell on </title>
+    <link>http://kiennt.com/categories/shell/</link>
+    <description>Recent content in Shell on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Sun, 01 Jul 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/categories/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kill process by name with `awk`</title>
+      <link>http://kiennt.com/blog/2012/07/01/kill-process-by-grep-name-with-awk.html</link>
+      <pubDate>Sun, 01 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/07/01/kill-process-by-grep-name-with-awk.html</guid>
+      <description>$&amp;gt; ps -ef | grep &amp;lt;process_name&amp;gt; | awk &amp;#39;{print $2}&amp;#39; | xargs kill -9</description>
+    </item>
+    
+  </channel>
+</rss>

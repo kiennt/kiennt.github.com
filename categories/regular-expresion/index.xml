@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Regular Expresion on </title>
+    <link>http://kiennt.com/categories/regular-expresion/</link>
+    <description>Recent content in Regular Expresion on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Sat, 30 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/categories/regular-expresion/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>VIM with regex</title>
+      <link>http://kiennt.com/blog/2012/06/30/regex-in-vim.html</link>
+      <pubDate>Sat, 30 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/30/regex-in-vim.html</guid>
+      <description>Regular expression in VIM, you can specify a regex group by \( and \). To get value of group, use \1 where 1 is number of group in regex
+For example, i want to replace all name with :name</description>
+    </item>
+    
+  </channel>
+</rss>

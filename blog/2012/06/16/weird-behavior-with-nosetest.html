@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/work-around.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Weird behavior of nosetest"/>
+<meta name="twitter:description" content="In this article, I shared my experience with a weird bug in nosetests. Let &rsquo;s
+see what is it, and what we could do to fix/avoid it in future.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Weird behavior of nosetest &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/16/weird-behavior-with-nosetest.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-16T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="python" />
+    
+    <meta property="og:article:tag" content="programming" />
+    
+    
+
+    <title>
+       Weird behavior of nosetest &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/16/weird-behavior-with-nosetest.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/work-around.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Weird behavior of nosetest</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-16T00:00:00Z">
+            Jun 16, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/python/">#python</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/programming/">#programming</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>In this article, I shared my experience with a weird bug in <code>nosetests</code>. Let &rsquo;s
+see what is it, and what we could do to fix/avoid it in future.</p>
+
+<p></p>
+
+<p>With unittest, two functions <code>setUp</code> and <code>tearDown</code> will call before and after
+every test case function.  With code bellow, I expected test cases will be passed:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> unittest
+
+<span style="color:#fff;font-weight:bold">class</span> TestSuite(unittest.TestCase):
+    b = []
+
+    <span style="color:#fff;font-weight:bold">def</span> setUp(self):
+        self.b.extend([<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>])
+
+    <span style="color:#fff;font-weight:bold">def</span> tearDown(self):
+        self.b = []
+
+    <span style="color:#fff;font-weight:bold">def</span> test_case_1(self):
+        self.b.append(<span style="color:#ff0;font-weight:bold">30</span>)
+        <span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">len</span>(self.b) == <span style="color:#ff0;font-weight:bold">3</span>
+        <span style="color:#fff;font-weight:bold">assert</span> self.b == [<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">30</span>]
+
+    <span style="color:#fff;font-weight:bold">def</span> test_case_2(self):
+        self.b.append(<span style="color:#ff0;font-weight:bold">40</span>)
+        <span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">len</span>(self.b) == <span style="color:#ff0;font-weight:bold">3</span>
+        <span style="color:#fff;font-weight:bold">assert</span> self.b == [<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">40</span>]</code></pre></div>
+<p>But when I run it with nose, the result is unexpected:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; nosetest test_module.py
+.F
+======================================================================
+FAIL: test_case_2 (test_module2.TestSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+File <span style="color:#0ff;font-weight:bold">&#34;/Users/knt/test_module2.py&#34;</span>, line <span style="color:#ff0;font-weight:bold">19</span>, in test_case_2
+    assert len(self.b) == <span style="color:#ff0;font-weight:bold">3</span>
+AssertionError
+
+----------------------------------------------------------------------
+Ran <span style="color:#ff0;font-weight:bold">2</span> tests in <span style="color:#ff0;font-weight:bold">0</span>.001s
+
+FAILED (failures=<span style="color:#ff0;font-weight:bold">1</span>)</code></pre></div>
+<p>What &rsquo;s happend ??? I expect after run <code>test_case_1</code>, <code>tearDown</code> will be
+called, so <code>self.b</code> is [].  With next test case <code>test_case_2</code>, <code>setUp</code>
+run and <code>self.b</code> is [10, 20]. But in fact, at <code>setUp</code> value of <code>self.b</code> is
+<code>[10, 20, 30]</code>.  I don&rsquo;t know why??? I think there must be some problems with statement
+<code>self.b = []</code>.  Anything related pointer, I guess. I still didn&rsquo;t figure it out, but I find a way
+to work around this bug. Just change <code>self.b = []</code> to <code>del self.b[:]</code>:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#fff;font-weight:bold">def</span> tearDown(self):
+        <span style="color:#fff;font-weight:bold">del</span> self.b[:]</code></pre></div>
+<p>Now, lunch time !!!</p>
+
+<h4 id="update">Update</h4>
+
+<p>I post my question on <a href="http://stackoverflow.com/questions/11061943/weird-behavior-of-nosetest">stackoverflow</a>,
+and the <a href="http://stackoverflow.com/a/11062902/126245">answer</a> explains about
+this bug.</p>
+
+<p>In <code>tearDown</code> function, when I <code>self.b = []</code>, the <code>b</code> variable is not
+class variable. In fact, python will create a new instance variable for this
+class.  After that, at next test case, nose and unittest will create new instance of
+TestSuite so, <code>self.b</code> of this instance still is a class variable. The reason
+why <code>del self.b[:]</code> works is it does not create a new instance variable, but
+still access class variable.</p>
+
+<p>This bug gives me a new lesson when dealing with class variables.
+The &ldquo;best practice&rdquo; with me is every time I want to access class variable in
+method, I should use <code>self.__class__.&lt;variable_name&gt;</code>.</p>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Weird%20behavior%20of%20nosetest&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f16%2fweird-behavior-with-nosetest.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f16%2fweird-behavior-with-nosetest.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f16%2fweird-behavior-with-nosetest.html&amp;description=Weird%20behavior%20of%20nosetest"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f16%2fweird-behavior-with-nosetest.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/16\/weird-behavior-with-nosetest.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

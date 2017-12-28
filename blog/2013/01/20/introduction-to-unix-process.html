@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Giới thiệu về Unix process (vietnamese)"/>
+<meta name="twitter:description" content="Là một kỹ sư lập trình hệ thống, một server guy, hay là một sys admin, sys dev,
+sys ops,&hellip; phần lớn thời gian bạn sẽ phải làm việc trên hệ thống Unix.
+Để làm việc trên Unix, chúng ta tương tác với hệ điều hành thông qua các
+lệnh (command). Mỗi lệnh trên Unix khi thực thi sẽ run một process hoặc một
+group các processes.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Giới thiệu về Unix process (vietnamese) &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2013-01-20T00:00:00Z" />
+
+    
+    
+
+    <title>
+       Giới thiệu về Unix process (vietnamese) &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Giới thiệu về Unix process (vietnamese)</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2013-01-20T00:00:00Z">
+            Jan 20, 2013
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>Là một kỹ sư lập trình hệ thống, một server guy, hay là một sys admin, sys dev,
+sys ops,&hellip; phần lớn thời gian bạn sẽ phải làm việc trên hệ thống Unix.
+Để làm việc trên Unix, chúng ta tương tác với hệ điều hành thông qua các
+lệnh (command). Mỗi lệnh trên Unix khi thực thi sẽ run một process hoặc một
+group các processes.</p>
+
+<p></p>
+
+<p>Trong bài viết này mình giới thiệu các kiến thức và kỹ thuật cơ bản để làm việc
+với Process trên Unix. Bài viết sẽ trình bày với code minh hoạ bằng Ruby (rồi
+bạn sẽ thấy Ruby rất đơn giản). Tất cả các code mình hoạ được chạy trên
+môi trường Unix (Linux của chính là Unix - nếu bạn chưa biết, vì thế đừng ngần
+ngại thử nó trên máy bạn).</p>
+
+<p>Dù mình đã rất cố gắng, nhưng có thể vẫn có sai sót, mình rất cám ơn các ý kiến
+đóng góp</p>
+
+<h2 id="i-một-số-kiến-thức-tổng-quan">I. Một số kiến thức tổng quan</h2>
+
+<p>Tất cả các chương trình trong Unix thực chất đều là các processes. terminal bạn
+chạy, apache, nginx, vim, hay bất cứ lệnh nào bạn gõ vào terminal. Process chính
+là đơn vị cấu thành nên Unix. Nó chính là một instance của chương trình bạn viết
+ra. Nói cách khác mỗi dòng code của bạn, sẽ được thực thi trên một process.</p>
+
+<p>Unix cung cấp tool <code>ps</code> để list ra tất cả các process đang chạy trên hệ thống</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; ps -e -opid,ppid,user,rss,command
+PID   PPID  USER     RSS      COMMAND
+<span style="color:#ff0;font-weight:bold">1</span>     <span style="color:#ff0;font-weight:bold">0</span>     root     <span style="color:#ff0;font-weight:bold">152</span>      init [<span style="color:#ff0;font-weight:bold">2</span>]
+<span style="color:#ff0;font-weight:bold">1695</span>  <span style="color:#ff0;font-weight:bold">1</span>     root     <span style="color:#ff0;font-weight:bold">428</span>      /usr/sbin/sshd
+<span style="color:#ff0;font-weight:bold">1863</span>  <span style="color:#ff0;font-weight:bold">1</span>     root     <span style="color:#ff0;font-weight:bold">48</span>       /sbin/getty <span style="color:#ff0;font-weight:bold">38400</span> tty1
+<span style="color:#ff0;font-weight:bold">1864</span>  <span style="color:#ff0;font-weight:bold">1</span>     root     <span style="color:#ff0;font-weight:bold">48</span>       /sbin/getty <span style="color:#ff0;font-weight:bold">38400</span> tty2
+<span style="color:#ff0;font-weight:bold">1865</span>  <span style="color:#ff0;font-weight:bold">1</span>     root     <span style="color:#ff0;font-weight:bold">48</span>       /sbin/getty <span style="color:#ff0;font-weight:bold">38400</span> tty3
+<span style="color:#ff0;font-weight:bold">1866</span>  <span style="color:#ff0;font-weight:bold">1</span>     root     <span style="color:#ff0;font-weight:bold">48</span>       /sbin/getty <span style="color:#ff0;font-weight:bold">38400</span> tty4
+<span style="color:#ff0;font-weight:bold">1867</span>  <span style="color:#ff0;font-weight:bold">1</span>     root     <span style="color:#ff0;font-weight:bold">48</span>       /sbin/getty <span style="color:#ff0;font-weight:bold">38400</span> tty5
+<span style="color:#ff0;font-weight:bold">1868</span>  <span style="color:#ff0;font-weight:bold">1</span>     root     <span style="color:#ff0;font-weight:bold">48</span>       /sbin/getty <span style="color:#ff0;font-weight:bold">38400</span> tty6
+<span style="color:#ff0;font-weight:bold">24477</span> <span style="color:#ff0;font-weight:bold">1695</span>  root     <span style="color:#ff0;font-weight:bold">2888</span>     sshd: vagrant [priv]
+<span style="color:#ff0;font-weight:bold">24479</span> <span style="color:#ff0;font-weight:bold">24477</span> vagrant  <span style="color:#ff0;font-weight:bold">1996</span>     sshd: vagrant@pts/0
+<span style="color:#ff0;font-weight:bold">24480</span> <span style="color:#ff0;font-weight:bold">24479</span> vagrant  <span style="color:#ff0;font-weight:bold">2328</span>     -bash
+<span style="color:#ff0;font-weight:bold">24591</span> <span style="color:#ff0;font-weight:bold">24480</span> vagrant  <span style="color:#ff0;font-weight:bold">1060</span>     ps -e -opid,ppid,user,rss,command</code></pre></div>
+<p>Ở đây, mình chạy lênh <code>ps</code> và show ra các thuộc tính <code>pid,ppid,user,rss,command</code>
+của process (chú ý (1) <code>ps</code> có rất nhiều option để chạy, nếu bạn muốn hiểu chỉ
+tiết, hãy sử dụng <code>man ps</code> để biết, (2) kểt quả trả về chỉ là một phần các
+process trên máy mình). Các thông tin mình muốn hiện thị ở đây bao gồm:</p>
+
+<ol>
+<li>PID - Process ID (id của process),</li>
+<li>PPID - Parent Process ID (id process cha của process đó),</li>
+<li>USER (tên user trên Unix start process),</li>
+<li>RSS (Resident Set Size) có thể coi bộ nhớ mà process sử dụng,</li>
+<li>COMMAND - command mà user sử dụng để chạy processs</li>
+</ol>
+
+<p>Chú ý rằng dòng cuối trong kết quả trả về show ra COMMAND là
+<code>ps -e -opid,ppid,user,rss,command</code> - chính là lệnh mà chúng ta dùng để chạy.
+Điều đó chứng tỏ, mỗi một command chính là một process !?</p>
+
+<p>Ngoài ra lệnh ps cũng cho chúng ta thấy, mỗi một Process sẽ có một Process ID,
+và thuộc về một Process cha nào đó. Process ID là duy nhất đối với mỗi một
+process, tức là 2 process khác nhau chắc chắn phải có PID khác nhau. Ngoài ra
+Process ID là không thể thay đổi trong khi chạy process.</p>
+
+<p>###1. Làm sao hệ điều hành đánh số các Process ID?</p>
+
+<p>Process ID được đánh số theo thứ tự tăng dần. Bắt đầu từ 0 và tăng lên cho tới
+khi gặp giá trị maximum. Giá trị maximum của Process ID là có thể cấu hình được
+tuỳ vào từng hệ thống.</p>
+
+<p>Trên Linux bạn có thể xem và thay đổi giá trị mặc định của Process ID maximum
+bằng cách thay đổi file <code>/proc/sys/kernel/pid_max</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007f7f"># read current maximum value of process id
+</span><span style="color:#007f7f"></span>$&gt; cat /proc/sys/kernel/pid_max
+<span style="color:#ff0;font-weight:bold">32768</span>
+
+<span style="color:#007f7f"># set maximum value for process id
+</span><span style="color:#007f7f"></span>$&gt; <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#ff0;font-weight:bold">40000</span> &gt; /proc/sys/kernel/pid_max</code></pre></div>
+<p>Khi process ID tăng đến giá trị maximum value, hệ điều hành (OS) sẽ quay trở lại
+đánh số từ một giá trị cụ thế (một số tài liệu nói giá trị này với Linux là 300,
+và với Mac OS là 100 - mình chưa biết cách để kiểm nghiệm điều này một cách an
+toàn)</p>
+
+<p>UNIX cung cấp syscall <code>getpid</code> trả về Process ID của process hiện tại. Bạn có thể
+viết một chương trình C đơn gian để lấy ra process id với <code>getpid</code>. Tuy nhiên,
+bài viết này của tôi sẽ tập trung vào ngôn ngữ Ruby</p>
+
+<p>Trong Ruby, muốn lấy Process ID của process hiện tai, bạn sử dụng <code>Process.pid</code>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007f7f"># file test_pid.rb</span>
+<span style="color:#fff;font-weight:bold">puts</span> <span style="color:#0ff;font-weight:bold">&#34;Process pid: </span><span style="color:#0ff;font-weight:bold">#{</span>Process.pid<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span></code></pre></div>
+<p>Dòng code trên gọi tới hàm <code>puts</code> - hàm này có tác dụng in một String ra màn hình.
+Chúng ta có thể manipulate các String trong Ruby thông qua các syntax #{}. Code
+ruby trong #{ } sẽ được thực hiện trước khi truyền cho String</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">$&gt; irb
+
+irb(main):<span style="color:#ff0;font-weight:bold">001</span>:<span style="color:#ff0;font-weight:bold">0</span>&gt; <span style="color:#fff;font-weight:bold">puts</span> <span style="color:#0ff;font-weight:bold">&#34;Example for String manipulate: 1 + 2 = </span><span style="color:#0ff;font-weight:bold">#{</span><span style="color:#ff0;font-weight:bold">1</span> + <span style="color:#ff0;font-weight:bold">2</span><span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span>
+Example <span style="color:#fff;font-weight:bold">for</span> <span style="color:#fff;font-weight:bold">String</span> <span style="color:#0ff;font-weight:bold">manipulate</span>: <span style="color:#ff0;font-weight:bold">1</span> + <span style="color:#ff0;font-weight:bold">2</span> = <span style="color:#ff0;font-weight:bold">3</span>
+=&gt; <span style="color:#fff;font-weight:bold">nil</span></code></pre></div>
+<p>(Các file Ruby có extension là .rb. Để chạy một file ruby, bạn dùng lệnh
+ <code>ruby &lt;file_name&gt;</code>. Không cần phải compile, rất đơn giản phải không)</p>
+
+<p>###2. Liệu có phải process nào cũng có Process cha?</p>
+
+<p>Ở  trên tôi đã nói rằng, mỗi một process đều thuộc về một Process cha nào đó.
+Nếu bạn suy nghĩ kỹ, bạn sẽ thấy có điều gì đó không ổn? À, thực ra điều này
+liên quan đến quá trình khởi động của UNIX. Khi UNIX được khởi động, nó sẽ start
+một process số 0 (với PID = 0) (process này là process của Kernel UNIX). Process
+0 sẽ tạo ra cho nó một Process con, Process 1. Trong phần lớn hệ thống, Process 1
+được đặt tên là init process, các process khác được tạo ra đều từ init process.</p>
+
+<p>Hãy quay lại ví dụ về lệnh <code>ps</code> như ở phần đầu mục I. Bạn có thể để ý thấy PPID
+của dòng đầu tiên là 0. Đó chính là process đầu tiên của OS.</p>
+
+<p>Vậy là process trong Unix thực chất được tổ chức dưới dạng cây. Mỗi một node
+trong cây đại diện cho một process trong Unix. Gốc chính là process 0, các con
+của một node chính là các process con của process ứng với node đó.</p>
+
+<p>Trong Ruby, để lấy ra parent process id của một process, chúng ta sử dung <code>Process.ppid</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007f7f"># file test_ppid.rb</span>
+<span style="color:#fff;font-weight:bold">puts</span> <span style="color:#0ff;font-weight:bold">&#34;Process id </span><span style="color:#0ff;font-weight:bold">#{</span>Process.pid<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">, parent process id </span><span style="color:#0ff;font-weight:bold">#{</span>Process.ppid<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span></code></pre></div>
+<p>Cũng rõ ràng đấy chứ. Liệu tôi có quên gì nữa không nhỉ?</p>
+
+<p>Vấn đề là làm sao một process  có thể sinh ra một process con? À đừng lo, tôi
+sẽ nói kỹ về điều này ở phần 2</p>
+
+<p>###3. Process Resource</p>
+
+<p>Ngoài ra lệnh <code>ps</code> của chúng ta còn cho thấy, mỗi Process đều có RSS khác nhau.
+RSS chính là bộ nhớ mà Process sử dụng. Các process khác nhau, có bộ nhớ khác nhau.
+Nói cách khác, không gian địa chỉ của các Process là riêng biệt. Nhớ thiết kế này
+mà các Process là độc lập với nhau. Nếu một Process bị chết, thì nó cũng không
+ảnh hưởng gì tới các Process khác.</p>
+
+<p>Ngoài bộ nhớ, hệ điều hành còn cấp phát cho Process các tài nguyên khác đó là các
+file descriptor. Nhớ rằng trên UNIX, mọi thứ đều là file. Điều đó có nghĩa là,
+devide được coi như file, socket được coi như file, pipe cũng là file, và file
+cũng là file!!! Để cho đơn giản, chúng ta sẽ dùng Resource thay cho khái niệm
+file nói chung, và file đại diện cho khái niệm file thông thường.</p>
+
+<p>Bất cứ khi nào bạn mở một Resource trong một process, resource đó sẽ được gán với
+một số file descriptor. File descriptor là không được chia sẽ giữa các process
+không liên quan. Các resource sẽ sống và tồn tại cùng  với process mà nó thuộc về.
+Khi process chết đi, các resource gắn với nó sẽ được close và exit.</p>
+
+<p>Mỗi một process sẽ có 3 files descriptor mặc định, bạn hẳn rất quen thuộc với
+chúng, đó chính là stdin, stdout và stderr. Các file descriptor được đánh số tăng
+dần từ 0 đến giá trị lớn nhất. Mỗi một process sẽ có một số giới hạn các file
+descriptor nó được quyền sử dụng.</p>
+
+<p>##II. forking</p>
+
+<p>Ở phần I.2, chúng ta đã nói về  process cha và process con, và đưa ra câu hỏi,
+làm sao một process có thể sinh ra các process khác.</p>
+
+<p>UNIX cung cấp một công cụ tuyệt vời để làm điều đó.
+Bạn chắc đã đoán ra, đó chính là <code>fork</code>.
+Theo cá nhân tôi, <code>fork</code> có lẽ là một trong những chức năng tốt nhất của UNIX.
+Vì sao ư? Vì process con được tạo ra với fork có 2 đặc điểm:</p>
+
+<ul>
+<li>process con được copy tất cả các memory từ process cha.</li>
+<li>process con sẽ được kế thứa từ process cha các resource</li>
+</ul>
+
+<p>Điều này có nghĩa là nếu trong process cha, bạn đã định nghĩa biến a, và gán
+giá trị cho nó, process con cũng có thể sử dụng biến đó.</p>
+
+<p>Uhm&hellip; Không phải như thế sẽ dẫn đến tình trạng 2 process cùng thay đổi một biến
+hay sao, vả lại chẳng phải các process là độc lập về bộ nhớ.</p>
+
+<p>À, tức là thế này, khi fork một process mới, bộ nhớ của process con và process
+cha vẫn là độc lập, nhưng hệ điều hành sẽ sử dụng cơ chế copy-on-wright (COW) để
+thực hiện việc đó. Tức là nếu process con không thay đổi các giá trị trong
+process cha, process con và process cha sẽ vẫn dùng chung bộ nhớ. Điều này làm
+cho các process con chỉ đọc, sẽ có memory rất nhỏ. Hay nói cách khác, UNIX cung
+cấp cho chúng ta một công cụ để chạy các multiprogram với một lượng resource vửa đủ.</p>
+
+<p>Điều này đặc biết tốt khi bạn cần load các library. Process cha sẽ đảm nhiệm việc
+load các library khác nhau. Sau khi load xong, nó fork ra các process con, và thực
+hiện việc điều khiển các process con. Các process con nhờ cơ chế COW, không cần
+phải tốn thời gian load library nữa mà vẫn có thể truy xuất vào các library</p>
+
+<p>Ngoài ra các process cha chia sẻ với process con các resource cũng dẫn đến một
+kỹ thuật khá thú vị: pre-forking - đặc biệt hiệu quả trong việc lập trình server.</p>
+
+<p>Kỹ thuật này được mô tả như sau:</p>
+
+<ul>
+<li>Main process khởi tạo một listening socket</li>
+<li>Main process fork ra một list các children process. Chú ý các children process
+này cũng sẽ listen trên socket mà main process tạo ra. Nhưng việc dispatch các
+incomming connection tới các children process là được thực hiện trên kernel.
+Điều này làm cho việc dispatch các incomming connection là rất nhanh</li>
+<li>Mỗi process sẽ accept các connection từ shared socket và xử lý chúng riêng biệt</li>
+<li>Main process sẽ kiểm soát các children process. (cung cấp lệnh để tắt tất cả
+các children process, tạo một child process mới khi một child process bị crash&hellip;)</li>
+</ul>
+
+<p>Kỹ thuật pre-forking được sử dụng rất nhiều. ví dụ: apache (httpd), nginx,
+    celery, postgresql, rabbitmq, &hellip;.</p>
+
+<p>Process trong Unix là một lĩnh vực rất thú vị, đặc biệt là trong lập trình hệ
+thống và lập trình server. Bài viết chỉ mới đề cập đến một vài kiến thức và kỹ
+thuật ban đầu với Process. Còn rất nhiều vấn đề chưa đề cập, như</p>
+
+<ul>
+<li>Tương tác giữa các process (IPC)</li>
+<li>Điều khiển các process</li>
+<li>Orphaned, daemon, zoombie, process &hellip;</li>
+</ul>
+
+<p>Hy vọng trong tương lai, mình sẽ có thể viết về các vấn đề này kỹ hơn.</p>
+
+<h2 id="update">Update</h2>
+
+<p>Bản slide tôi trình bày tại công ty Framgia về UNIX Process</p>
+
+<script async class="speakerdeck-embed" data-id="ce0d6da05a2e0130b5ab22000a8f8802" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen</a></h4>
+  
+  <p>A father, husband, and passinate programmer</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Gi%e1%bb%9bi%20thi%e1%bb%87u%20v%e1%bb%81%20Unix%20process%20%28vietnamese%29&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2013%2f01%2f20%2fintroduction-to-unix-process.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2013%2f01%2f20%2fintroduction-to-unix-process.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2013%2f01%2f20%2fintroduction-to-unix-process.html&amp;description=Gi%e1%bb%9bi%20thi%e1%bb%87u%20v%e1%bb%81%20Unix%20process%20%28vietnamese%29"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2013%2f01%2f20%2fintroduction-to-unix-process.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2013\/01\/20\/introduction-to-unix-process.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

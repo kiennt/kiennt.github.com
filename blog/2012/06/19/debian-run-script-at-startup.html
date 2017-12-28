@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/startup.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Debian run script at startup time"/>
+<meta name="twitter:description" content="When managing a server, we sometimes want when a server boots up, it also starts some services automatically. Especially if you are running a web application, you will want to run: web server, database server, your app instances, your background queue manager, &hellip; and many other things.
+
+This article will write about how to do these kinds of things with debian (please take a look at my other article about config debian virtual machine.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Debian run script at startup time &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-19T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="server" />
+    
+    <meta property="og:article:tag" content="debian" />
+    
+    
+
+    <title>
+       Debian run script at startup time &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/startup.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Debian run script at startup time</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-19T00:00:00Z">
+            Jun 19, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/server/">#server</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/debian/">#debian</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>When managing a server, we sometimes want when a server boots up, it also starts some services automatically. Especially if you are running a web application, you will want to run: web server, database server, your app instances, your background queue manager, &hellip; and many other things.</p>
+
+<p>This article will write about how to do these kinds of things with <code>debian</code> (please take a look at my other article about <a href="http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html">config debian virtual machine</a>.</p>
+
+<p></p>
+
+<p>Debian using Sys-V like init system for executing commands when the system run level changes.</p>
+
+<p>Using <code>update-rc.d</code> to add new startup script.
+(If you want to know more about Sys-V startup script, please take a look at <code>update-rc.d</code> document from <code>man</code> command)</p>
+
+<p>If <code>udpate-rc.d</code> is not found in your terminal, update your $PATH</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007f7f"># please remember add the character &#39;\&#39; before $PATH in below command
+</span><span style="color:#007f7f"></span>$&gt; <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#fff;font-weight:bold">export</span> PATH=/sbin:/usr/sbin:<span style="color:#0ff;font-weight:bold">\$</span>PATH &gt;&gt; ~/.bashrc
+$&gt; <span style="color:#fff;font-weight:bold">source</span> ~/.bashrc</code></pre></div>
+<p>Then you write a script to run at startup. You can check out my <code>pg</code> script for startup PostgreSQL database server at <a href="http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html">config Debian virtual ma    chine</a>.</p>
+
+<p>Please puts the script at <code>/etc/init.d</code> folder.</p>
+
+<p>Now, using <code>update-rc.d</code> to add this script at startup time</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; sudo update-rc.d pg defaults</code></pre></div>
+<p>If you want to remove this script when system boot, using command</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; sudo update-rc.d -f pg remove</code></pre></div>
+<h4 id="update-1">UPDATE 1</h4>
+
+<p>From Debian 6, they support command <code>insserv</code> to replace <code>update-rc.d</code></p>
+
+<h4 id="update-2">UPDATE 2</h4>
+
+<p>The PostgreSQL script pg_ctl can not run with <code>root</code> user, to run it, you must run with other user.</p>
+
+<p>But the problem is: At start up time, you run with <code>root</code> user, so we must using another user to run it.</p>
+
+<p>When you install PostgreSQL database, it create in the system a new user &ldquo;postgres&rdquo;.  We will use this use to run postgres</p>
+
+<p>NOTE: To run a command with another user, using</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; su -c <span style="color:#0ff;font-weight:bold">&#34;&lt;command&gt; &lt;parameters&gt;&#34;</span> &lt;user_name&gt;</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; sudo mkdir -p /opt/postgres
+$&gt; sudo chown postgres /opt/postgres
+$&gt; su -c <span style="color:#0ff;font-weight:bold">&#34;mkdir -p /opt/postgres/database /opt/postgres/log&#34;</span> postgres
+$&gt; su -c <span style="color:#0ff;font-weight:bold">&#34;touch /opt/postgres/log/postgres.1.9.log&#34;</span>
+$&gt; vim /etc/init.d/pg
+<span style="color:#0f0;font-weight:bold">#!/usr/bin/env sh
+</span><span style="color:#0f0;font-weight:bold"></span>
+<span style="color:#007f7f">### BEGIN INIT INFO
+</span><span style="color:#007f7f"># Provides:          pg
+</span><span style="color:#007f7f"># Required-Start:    $local_fs $remote_fs $network $syslog
+</span><span style="color:#007f7f"># Required-Stop:     $local_fs $remote_fs $network $syslog
+</span><span style="color:#007f7f"># Default-Start:     2 3 4 5
+</span><span style="color:#007f7f"># Default-Stop:      0 1 6
+</span><span style="color:#007f7f"># Short-Description: starts the postgresql database
+</span><span style="color:#007f7f"># Description:       starts pg_ctl using start-stop-daemon
+</span><span style="color:#007f7f">### END INIT INFO
+</span><span style="color:#007f7f"></span>
+PROGRAM=pg
+START_STOP_DAEMON=/sbin/start-stop-daemon
+PGCTL=/usr/lib/postgresql/9.1/bin/pg_ctl
+DATAPATH=/opt/postgres/database
+LOGFILE=/opt/postgres/log/postgres.9.1.log
+DAEMON=$PGCTL
+DAEMON_OPTS=<span style="color:#0ff;font-weight:bold">&#34;-D </span>$DATAPATH<span style="color:#0ff;font-weight:bold"> start -l </span>$LOGFILE<span style="color:#0ff;font-weight:bold">&#34;</span>
+
+start() {
+    <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;Starting PostgreSQL server ...&#34;</span>
+    su -c <span style="color:#0ff;font-weight:bold">&#34;</span>$DAEMON<span style="color:#0ff;font-weight:bold"> </span>$DAEMON_OPTS<span style="color:#0ff;font-weight:bold">&#34;</span> postgres
+}
+
+stop() {
+    su -c <span style="color:#0ff;font-weight:bold">&#34;</span>$PGCTL<span style="color:#0ff;font-weight:bold"> -D </span>$DATAPATH<span style="color:#0ff;font-weight:bold"> stop&#34;</span> postgres
+}
+
+<span style="color:#fff;font-weight:bold">case</span> $1 in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        <span style="color:#fff;font-weight:bold">echo</span> <span style="color:#0ff;font-weight:bold">&#34;USAGE </span>$PROGRAM<span style="color:#0ff;font-weight:bold"> {start|stop|restart}&#34;</span>
+        ;;
+<span style="color:#fff;font-weight:bold">esac</span>
+$&gt; sudo update-rc.d pg defaults</code></pre></div>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Debian%20run%20script%20at%20startup%20time&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f19%2fdebian-run-script-at-startup.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f19%2fdebian-run-script-at-startup.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f19%2fdebian-run-script-at-startup.html&amp;description=Debian%20run%20script%20at%20startup%20time"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f19%2fdebian-run-script-at-startup.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/19\/debian-run-script-at-startup.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Server on </title>
+    <link>http://kiennt.com/tags/server/</link>
+    <description>Recent content in Server on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Fri, 29 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/server/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Run program in UNIX and make pidfile for it</title>
+      <link>http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html</link>
+      <pubDate>Fri, 29 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html</guid>
+      <description>&lt;p&gt;We sometime want to run a program and after than stop it.&lt;/p&gt;
+
+&lt;p&gt;For example, at boot time, we start an &lt;a href=&#34;http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html&#34;&gt;selenium&lt;/a&gt;.
+But after that, we want to stop it.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Config PostgreSQL database with authentication</title>
+      <link>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</guid>
+      <description>&lt;p&gt;This article is what I learn about config PostgreSQL server and set its
+authentication up.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using vagrant to setup multiple virtual machine</title>
+      <link>http://kiennt.com/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie.html</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie.html</guid>
+      <description>&lt;p&gt;This is another post about using Vagrant to set up development environment
+in your local machine.
+Please consider to read previous post about setup &lt;a href=&#34;http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html&#34;&gt;vagrant&lt;/a&gt; for one VM.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Add new startup items on Mac OSX</title>
+      <link>http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html</link>
+      <pubDate>Wed, 27 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html</guid>
+      <description>&lt;p&gt;In DEBIAN, when we want to add new start up item, we create new script file in
+/etc/init.d and using update-rc.d to add it.
+But in Mac OSX, there is not /etc/init.d and update-rc.d anymore.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Start psql without enter password</title>
+      <link>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</link>
+      <pubDate>Wed, 27 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</guid>
+      <description>&lt;p&gt;It &amp;rsquo;s so inconvenience when everytime you want to access &lt;code&gt;psql&lt;/code&gt;, you
+need to enter your &lt;strong&gt;so long&lt;/strong&gt; password&lt;/p&gt;
+
+&lt;p&gt;Today, i learnt how to remove this step by using environment variable
+&lt;code&gt;PGPASSWORD&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Change LINUX timezone and datetime</title>
+      <link>http://kiennt.com/blog/2012/06/25/unix-change-time.html</link>
+      <pubDate>Mon, 25 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/25/unix-change-time.html</guid>
+      <description>&lt;p&gt;This article is some TIL about setting up timezone in Debian server&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Config virtual host with NGINX in DEBIAN</title>
+      <link>http://kiennt.com/blog/2012/06/25/config-virtualhost-with-nginx.html</link>
+      <pubDate>Mon, 25 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/25/config-virtualhost-with-nginx.html</guid>
+      <description>&lt;p&gt;This article, I want to shared what I learn when install a virtual host for
+NGINX in an Debian server.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using deamon tools to make process keep alive</title>
+      <link>http://kiennt.com/blog/2012/06/19/manager-daemon-process-with-daemon-tools.html</link>
+      <pubDate>Tue, 19 Jun 2012 08:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/19/manager-daemon-process-with-daemon-tools.html</guid>
+      <description>&lt;p&gt;Sometime, you want your process run forever, for example your web server, your web application instance, your database, your crawler, &amp;hellip; But how you keep it running? Well, in UNIX we have &lt;a href=&#34;http://cr.yp.to/daemontools.html&#34;&gt;daemon&lt;/a&gt; tools. To install it on &lt;code&gt;debian&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Debian run script at startup time</title>
+      <link>http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html</link>
+      <pubDate>Tue, 19 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html</guid>
+      <description>&lt;p&gt;When managing a server, we sometimes want when a server boots up, it also starts some services automatically. Especially if you are running a web application, you will want to run: web server, database server, your app instances, your background queue manager, &amp;hellip; and many other things.&lt;/p&gt;
+
+&lt;p&gt;This article will write about how to do these kinds of things with &lt;code&gt;debian&lt;/code&gt; (please take a look at my other article about &lt;a href=&#34;http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html&#34;&gt;config debian virtual machine&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Set up development environment with Vagrant</title>
+      <link>http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html</link>
+      <pubDate>Mon, 18 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html</guid>
+      <description>&lt;p&gt;When you join a new company, to start to contribute to the code base, you will need
+to set up a development environment on your local machine. Most of the time,
+the team will give you the &lt;code&gt;bootstrap&lt;/code&gt; script to do that. But sometimes, that
+magical script does not exist, and that is the time you know you should introduce
+the team your &lt;code&gt;bootstrap&lt;/code&gt; script. In this article, I shared what I learned
+while building a script by using Vagrant.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

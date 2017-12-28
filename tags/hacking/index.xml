@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hacking on </title>
+    <link>http://kiennt.com/tags/hacking/</link>
+    <description>Recent content in Hacking on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Fri, 28 Mar 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/hacking/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hacking pinterest android app</title>
+      <link>http://kiennt.com/blog/2014/03/28/hacking-pinterest.html</link>
+      <pubDate>Fri, 28 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2014/03/28/hacking-pinterest.html</guid>
+      <description>&lt;p&gt;This article show a way to get private key for Pinterest android app. This article is inspired from this one &lt;a href=&#34;http://blog.will3942.com/reverse-engineering-instagram&#34;&gt;http://blog.will3942.com/reverse-engineering-instagram&lt;/a&gt;. This method was tested on Pinterest app version 2.4.2 and was done from MacOSX.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

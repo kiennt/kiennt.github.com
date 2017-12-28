@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Testing on </title>
+    <link>http://kiennt.com/tags/testing/</link>
+    <description>Recent content in Testing on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Fri, 29 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using selenium with headless browser</title>
+      <link>http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html</link>
+      <pubDate>Fri, 29 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html</guid>
+      <description>&lt;p&gt;My note about setting selenium&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

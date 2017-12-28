@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on </title>
+    <link>http://kiennt.com/post/</link>
+    <description>Recent content in Posts on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Fri, 28 Mar 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hacking pinterest android app</title>
+      <link>http://kiennt.com/blog/2014/03/28/hacking-pinterest.html</link>
+      <pubDate>Fri, 28 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2014/03/28/hacking-pinterest.html</guid>
+      <description>&lt;p&gt;This article show a way to get private key for Pinterest android app. This article is inspired from this one &lt;a href=&#34;http://blog.will3942.com/reverse-engineering-instagram&#34;&gt;http://blog.will3942.com/reverse-engineering-instagram&lt;/a&gt;. This method was tested on Pinterest app version 2.4.2 and was done from MacOSX.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>apt-get install failed</title>
+      <link>http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html</guid>
+      <description>&lt;p&gt;Today, when setting up my debian server, I get this error&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to deploy a feature branch to heroku</title>
+      <link>http://kiennt.com/blog/2013/03/13/how-to-deploy-a-branch-to-heroku.html</link>
+      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/03/13/how-to-deploy-a-branch-to-heroku.html</guid>
+      <description>&lt;p&gt;We often have many issues/feature which need to fix/enhance/add.&lt;/p&gt;
+
+&lt;p&gt;When developing an feature, we write code in local, the code is not finished.
+But we found out there is a critical bugs in production, and that bug need to fix
+immediately. We will need to deploy a hot fix the bug, but the hot fix should
+not contains the incomplete code we wrote for the new feature.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Giới thiệu về Unix process (vietnamese)</title>
+      <link>http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html</link>
+      <pubDate>Sun, 20 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html</guid>
+      <description>&lt;p&gt;Là một kỹ sư lập trình hệ thống, một server guy, hay là một sys admin, sys dev,
+sys ops,&amp;hellip; phần lớn thời gian bạn sẽ phải làm việc trên hệ thống Unix.
+Để làm việc trên Unix, chúng ta tương tác với hệ điều hành thông qua các
+lệnh (command). Mỗi lệnh trên Unix khi thực thi sẽ run một process hoặc một
+group các processes.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Running celery task synchronous when testing django app</title>
+      <link>http://kiennt.com/blog/2012/11/07/run-celery-task-synchronous-when-testing-django.html</link>
+      <pubDate>Wed, 07 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/11/07/run-celery-task-synchronous-when-testing-django.html</guid>
+      <description>&lt;p&gt;Celery support running task synchronous by config variable &lt;code&gt;CELERY_ALWAYS_EAGER&lt;/code&gt;.
+But where to put this variable? and could I can select run celery task synchronous
+with some testcase?&lt;/p&gt;
+
+&lt;p&gt;I do some googling but did not find any good result. So I post this on my blog
+to help someone like me.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Django show sql query in shell</title>
+      <link>http://kiennt.com/blog/2012/10/25/django-show-sql-query-in-shell.html</link>
+      <pubDate>Thu, 25 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/10/25/django-show-sql-query-in-shell.html</guid>
+      <description>To show sql query in python manage.py shell, we use this code
+import logging l = logging.getLogger(&amp;#39;django.db.backends&amp;#39;) l.setLevel(logging.DEBUG) l.</description>
+    </item>
+    
+    <item>
+      <title>Authentication django-tastypie in right way</title>
+      <link>http://kiennt.com/blog/2012/10/16/authenticated-django-tastypie-in-right-way.html</link>
+      <pubDate>Tue, 16 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/10/16/authenticated-django-tastypie-in-right-way.html</guid>
+      <description>&lt;p&gt;When using django-tastypie, I got some problems with security.
+In my pinterest-clone application, I build a pin model.
+A &lt;code&gt;pin&lt;/code&gt; is a image with a description and tags for it`&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mysql without password</title>
+      <link>http://kiennt.com/blog/2012/08/03/mysqldump-without-password.html</link>
+      <pubDate>Fri, 03 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/08/03/mysqldump-without-password.html</guid>
+      <description>&lt;p&gt;When dealing with database, sometime we want to make backup database.
+I usually use mysqldump to store all database in sql file.
+The problem is when running, mysqldump ask us to provide password.
+If you must enter password everytime you run the command, you cannot make it run
+automatically with crontab script&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Use `grep` command to find content in Linux</title>
+      <link>http://kiennt.com/blog/2012/07/09/use-grep-to-find-content-in-linux.html</link>
+      <pubDate>Mon, 09 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/07/09/use-grep-to-find-content-in-linux.html</guid>
+      <description>$&amp;gt; grep -r -in &amp;#34;SENTRY&amp;#34; --include=*.py . -R : recursive -in: show line and color &amp;ndash;include: only find files with pattern &amp;ldquo;*.py&amp;rdquo; . : the directory we will find in</description>
+    </item>
+    
+    <item>
+      <title>Watch directory change with Python watchdog library</title>
+      <link>http://kiennt.com/blog/2012/07/05/watch-directiory-change-with-python-watchdog.html</link>
+      <pubDate>Thu, 05 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/07/05/watch-directiory-change-with-python-watchdog.html</guid>
+      <description>&lt;p&gt;Watchdog is Python API and shell utilities to monitor file system events.&lt;/p&gt;
+
+&lt;p&gt;Watchdog come with a tool call &lt;code&gt;watchmedo&lt;/code&gt; to call shell command
+when we get change on a directiory.
+The &amp;ldquo;change&amp;rdquo; include: delete/modify/create a file in directory.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kill process by name with `awk`</title>
+      <link>http://kiennt.com/blog/2012/07/01/kill-process-by-grep-name-with-awk.html</link>
+      <pubDate>Sun, 01 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/07/01/kill-process-by-grep-name-with-awk.html</guid>
+      <description>$&amp;gt; ps -ef | grep &amp;lt;process_name&amp;gt; | awk &amp;#39;{print $2}&amp;#39; | xargs kill -9</description>
+    </item>
+    
+    <item>
+      <title>VIM with regex</title>
+      <link>http://kiennt.com/blog/2012/06/30/regex-in-vim.html</link>
+      <pubDate>Sat, 30 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/30/regex-in-vim.html</guid>
+      <description>Regular expression in VIM, you can specify a regex group by \( and \). To get value of group, use \1 where 1 is number of group in regex
+For example, i want to replace all name with :name</description>
+    </item>
+    
+    <item>
+      <title>Run program in UNIX and make pidfile for it</title>
+      <link>http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html</link>
+      <pubDate>Fri, 29 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html</guid>
+      <description>&lt;p&gt;We sometime want to run a program and after than stop it.&lt;/p&gt;
+
+&lt;p&gt;For example, at boot time, we start an &lt;a href=&#34;http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html&#34;&gt;selenium&lt;/a&gt;.
+But after that, we want to stop it.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using selenium with headless browser</title>
+      <link>http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html</link>
+      <pubDate>Fri, 29 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html</guid>
+      <description>&lt;p&gt;My note about setting selenium&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Config PostgreSQL database with authentication</title>
+      <link>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</guid>
+      <description>&lt;p&gt;This article is what I learn about config PostgreSQL server and set its
+authentication up.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using vagrant to setup multiple virtual machine</title>
+      <link>http://kiennt.com/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie.html</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie.html</guid>
+      <description>&lt;p&gt;This is another post about using Vagrant to set up development environment
+in your local machine.
+Please consider to read previous post about setup &lt;a href=&#34;http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html&#34;&gt;vagrant&lt;/a&gt; for one VM.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Add new startup items on Mac OSX</title>
+      <link>http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html</link>
+      <pubDate>Wed, 27 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html</guid>
+      <description>&lt;p&gt;In DEBIAN, when we want to add new start up item, we create new script file in
+/etc/init.d and using update-rc.d to add it.
+But in Mac OSX, there is not /etc/init.d and update-rc.d anymore.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Start psql without enter password</title>
+      <link>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</link>
+      <pubDate>Wed, 27 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</guid>
+      <description>&lt;p&gt;It &amp;rsquo;s so inconvenience when everytime you want to access &lt;code&gt;psql&lt;/code&gt;, you
+need to enter your &lt;strong&gt;so long&lt;/strong&gt; password&lt;/p&gt;
+
+&lt;p&gt;Today, i learnt how to remove this step by using environment variable
+&lt;code&gt;PGPASSWORD&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Change LINUX timezone and datetime</title>
+      <link>http://kiennt.com/blog/2012/06/25/unix-change-time.html</link>
+      <pubDate>Mon, 25 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/25/unix-change-time.html</guid>
+      <description>&lt;p&gt;This article is some TIL about setting up timezone in Debian server&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Config virtual host with NGINX in DEBIAN</title>
+      <link>http://kiennt.com/blog/2012/06/25/config-virtualhost-with-nginx.html</link>
+      <pubDate>Mon, 25 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/25/config-virtualhost-with-nginx.html</guid>
+      <description>&lt;p&gt;This article, I want to shared what I learn when install a virtual host for
+NGINX in an Debian server.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python object model</title>
+      <link>http://kiennt.com/blog/2012/06/23/python-object-models.html</link>
+      <pubDate>Sat, 23 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/23/python-object-models.html</guid>
+      <description>&lt;p&gt;&amp;ldquo;In Python, everything is object&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;What does it means? Is that like other Programming Language (for example Java),
+everything in Python is instance of Base Class?
+If it is, what is the Base Class in Python? I have heard about &lt;code&gt;object&lt;/code&gt;
+class in Python, is that Base Class?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Weeken with python (part 3)</title>
+      <link>http://kiennt.com/blog/2012/06/23/weekend-with-python-part3.html</link>
+      <pubDate>Sat, 23 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/23/weekend-with-python-part3.html</guid>
+      <description>&lt;p&gt;In this serial, I write about what I learned about Python over the weekend.
+This week, I talked about (1) how to write a function to find an element in a
+list , (2) remove function of list, and (3) the different between &lt;code&gt;__getattr__&lt;/code&gt;
+and &lt;code&gt;__getattribute__&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fabric run remote with specify user on a hostname</title>
+      <link>http://kiennt.com/blog/2012/06/22/fabric-run-with-specify-user.html</link>
+      <pubDate>Fri, 22 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/22/fabric-run-with-specify-user.html</guid>
+      <description>&lt;p&gt;A little snippet to run fabric under specify user with ssh config:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac OSX Lion with 2D Dock</title>
+      <link>http://kiennt.com/blog/2012/06/21/macosx-2d-dock.html</link>
+      <pubDate>Thu, 21 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/21/macosx-2d-dock.html</guid>
+      <description>&lt;p&gt;Dock in MacOSX Lion is cool, but i like simplicity. I dont like 3D Dock, and prefer 2D Dock.
+In MacOSX Lion, to disable 3D effect on Dock, i do by followed step&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using deamon tools to make process keep alive</title>
+      <link>http://kiennt.com/blog/2012/06/19/manager-daemon-process-with-daemon-tools.html</link>
+      <pubDate>Tue, 19 Jun 2012 08:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/19/manager-daemon-process-with-daemon-tools.html</guid>
+      <description>&lt;p&gt;Sometime, you want your process run forever, for example your web server, your web application instance, your database, your crawler, &amp;hellip; But how you keep it running? Well, in UNIX we have &lt;a href=&#34;http://cr.yp.to/daemontools.html&#34;&gt;daemon&lt;/a&gt; tools. To install it on &lt;code&gt;debian&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Debian run script at startup time</title>
+      <link>http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html</link>
+      <pubDate>Tue, 19 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html</guid>
+      <description>&lt;p&gt;When managing a server, we sometimes want when a server boots up, it also starts some services automatically. Especially if you are running a web application, you will want to run: web server, database server, your app instances, your background queue manager, &amp;hellip; and many other things.&lt;/p&gt;
+
+&lt;p&gt;This article will write about how to do these kinds of things with &lt;code&gt;debian&lt;/code&gt; (please take a look at my other article about &lt;a href=&#34;http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html&#34;&gt;config debian virtual machine&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Set up development environment with Vagrant</title>
+      <link>http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html</link>
+      <pubDate>Mon, 18 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html</guid>
+      <description>&lt;p&gt;When you join a new company, to start to contribute to the code base, you will need
+to set up a development environment on your local machine. Most of the time,
+the team will give you the &lt;code&gt;bootstrap&lt;/code&gt; script to do that. But sometimes, that
+magical script does not exist, and that is the time you know you should introduce
+the team your &lt;code&gt;bootstrap&lt;/code&gt; script. In this article, I shared what I learned
+while building a script by using Vagrant.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Weeken with python (part 2)</title>
+      <link>http://kiennt.com/blog/2012/06/17/weekend-with-python-part2.html</link>
+      <pubDate>Sun, 17 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/17/weekend-with-python-part2.html</guid>
+      <description>&lt;p&gt;In this serial, I write about what I learned about Python over the weekend.
+This week, I talk about 2 problems (1) function argument &amp;rsquo;s default value
+and (2) function variable argument.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Weird behavior of nosetest</title>
+      <link>http://kiennt.com/blog/2012/06/16/weird-behavior-with-nosetest.html</link>
+      <pubDate>Sat, 16 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/16/weird-behavior-with-nosetest.html</guid>
+      <description>&lt;p&gt;In this article, I shared my experience with a weird bug in &lt;code&gt;nosetests&lt;/code&gt;. Let &amp;rsquo;s
+see what is it, and what we could do to fix/avoid it in future.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Weeken with python (part 1)</title>
+      <link>http://kiennt.com/blog/2012/06/15/weekend-with-python-part1.html</link>
+      <pubDate>Fri, 15 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/15/weekend-with-python-part1.html</guid>
+      <description>&lt;p&gt;In this serial, I write about what I learned about Python over the weekend.
+This week, I talked about (1) what is different between &lt;code&gt;static method&lt;/code&gt; and
+&lt;code&gt;class method&lt;/code&gt;, and (2) testing in python.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python object and dictionary convertion</title>
+      <link>http://kiennt.com/blog/2012/06/14/python-object-and-dictionary-convertion.html</link>
+      <pubDate>Thu, 14 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/14/python-object-and-dictionary-convertion.html</guid>
+      <description>&lt;p&gt;When programing in Python, sometimes you want to convert an object to
+dictionary and vise versal. In this article, I share my expericences
+to do that.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

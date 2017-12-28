@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="apt-get install failed"/>
+<meta name="twitter:description" content="Today, when setting up my debian server, I get this error
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" apt-get install failed &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2013-07-09T00:00:00Z" />
+
+    
+    
+
+    <title>
+       apt-get install failed &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">apt-get install failed</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2013-07-09T00:00:00Z">
+            Jul 9, 2013
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>Today, when setting up my debian server, I get this error</p>
+
+<p></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[chef]:~$ sudo apt-get install -f
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Correcting dependencies... Done
+The following extra packages will be installed:
+  libgtk2.0-0
+  Suggested packages:
+    librsvg2-common gvfs
+    The following NEW packages will be installed:
+      libgtk2.0-0
+      <span style="color:#ff0;font-weight:bold">0</span> upgraded, <span style="color:#ff0;font-weight:bold">1</span> newly installed, <span style="color:#ff0;font-weight:bold">0</span> to remove and <span style="color:#ff0;font-weight:bold">235</span> not upgraded.
+      <span style="color:#ff0;font-weight:bold">90</span> not fully installed or removed.
+      Need to get <span style="color:#ff0;font-weight:bold">0</span> B/2,224 kB of archives.
+      After this operation, <span style="color:#ff0;font-weight:bold">6</span>,230 kB of additional disk space will be used.
+      Do you want to <span style="color:#fff;font-weight:bold">continue</span> [Y/n]? Y
+      (Reading database ... <span style="color:#ff0;font-weight:bold">37319</span> files and directories currently installed.)
+    Unpacking libgtk2.0-0 (from .../libgtk2.0-0_2.24.18-1_amd64.deb) ...
+    dpkg: error processing /var/cache/apt/archives/libgtk2.0-0_2.24.18-1_amd64.deb (--unpack):
+     triggers ci file contains unknown directive <span style="color:#0ff;font-weight:bold">`</span>interest-noawait<span style="color:#f00">&#39;</span>
+     configured to not write apport reports
+Errors were encountered <span style="color:#fff;font-weight:bold">while</span> processing:
+/var/cache/apt/archives/libgtk2.0-0_2.24.18-1_amd64.deb
+E: Sub-process /usr/bin/dpkg returned an error code (<span style="color:#ff0;font-weight:bold">1</span>)</code></pre></div>
+<p>This error happened because of failure install of some packages. It make we cannot use apt-get to install any packages.</p>
+
+<p>To solve it, firstly we need to find which packages are fail to install</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[chef]:-$ sudo dpkg --configure -a
+Setting up libpth20 (<span style="color:#ff0;font-weight:bold">2</span>.0.7-16) ...
+Setting up libxdmcp6 (<span style="color:#ff0;font-weight:bold">1</span>:1.1.1-1) ...
+Setting up libdbus-1-3 (<span style="color:#ff0;font-weight:bold">1</span>.6.12-1) ...
+Setting up libjs-jquery (<span style="color:#ff0;font-weight:bold">1</span>.7.2+dfsg-2) ...
+Setting up libtasn1-3 (<span style="color:#ff0;font-weight:bold">2</span>.14-3) ...
+Setting up python-zope.interface (<span style="color:#ff0;font-weight:bold">4</span>.0.5-1) ...
+Setting up libgraphite2-3 (<span style="color:#ff0;font-weight:bold">1</span>.2.3-1) ...
+Setting up libgpg-error0 (<span style="color:#ff0;font-weight:bold">1</span>.10-3.1) ...
+Setting up hicolor-icon-theme (<span style="color:#ff0;font-weight:bold">0</span>.12-1) ...
+Setting up libglib2.0-data (<span style="color:#ff0;font-weight:bold">2</span>.36.1-2build1) ...
+Setting up libgssglue1 (<span style="color:#ff0;font-weight:bold">0</span>.4-2) ...
+Installing new version of config file /etc/gssapi_mech.conf ...
+Setting up python-configobj (<span style="color:#ff0;font-weight:bold">4</span>.7.2+ds-5) ...
+Setting up libthai-data (<span style="color:#ff0;font-weight:bold">0</span>.1.19-2) ...
+Setting up python-lazr.uri (<span style="color:#ff0;font-weight:bold">1</span>.0.3-1) ...
+Setting up fonts-dejavu-core (<span style="color:#ff0;font-weight:bold">2</span>.33+svn2514-3) ...
+Setting up python-keyring (<span style="color:#ff0;font-weight:bold">0</span>.9.3-1) ...
+Setting up libjbig0 (<span style="color:#ff0;font-weight:bold">2</span>.0-2) ...
+Setting up krb5-locales (<span style="color:#ff0;font-weight:bold">1</span>.10.1+dfsg-6.1) ...
+dpkg: dependency problems prevent configuration of pinentry-gtk2:
+ pinentry-gtk2 depends on libgtk2.0-0 (&gt;= <span style="color:#ff0;font-weight:bold">2</span>.10.0); however:
+  Package libgtk2.0-0 is not installed.
+dpkg: error processing pinentry-gtk2 (--configure):
+ dependency problems - leaving unconfigured
+Setting up libgtk2.0-common (<span style="color:#ff0;font-weight:bold">2</span>.24.18-1) ...
+Setting up libtiff4 (<span style="color:#ff0;font-weight:bold">3</span>.9.7-1) ...
+Setting up libsystemd-login0 (<span style="color:#ff0;font-weight:bold">44</span>-12) ...
+Setting up libassuan0 (<span style="color:#ff0;font-weight:bold">2</span>.1.0-1) ...
+Setting up libkrb5support0 (<span style="color:#ff0;font-weight:bold">1</span>.10.1+dfsg-6.1) ...
+Setting up python-bzrlib (<span style="color:#ff0;font-weight:bold">2</span>.6.0~bzr6574-1) ...
+Setting up libgdk-pixbuf2.0-common (<span style="color:#ff0;font-weight:bold">2</span>.28.2-1) ...
+Setting up libksba8 (<span style="color:#ff0;font-weight:bold">1</span>.3.0-2) ...
+Setting up libdatrie1 (<span style="color:#ff0;font-weight:bold">0</span>.2.6-2) ...
+Setting up libavahi-common-data (<span style="color:#ff0;font-weight:bold">0</span>.6.31-2) ...
+Setting up libjasper1 (<span style="color:#ff0;font-weight:bold">1</span>.900.1-14) ...
+Setting up libavahi-common3 (<span style="color:#ff0;font-weight:bold">0</span>.6.31-2) ...
+Setting up python-simplejson (<span style="color:#ff0;font-weight:bold">2</span>.6.2-1) ...
+Setting up python-crypto (<span style="color:#ff0;font-weight:bold">2</span>.6-5) ...
+Setting up ttf-dejavu-core (<span style="color:#ff0;font-weight:bold">2</span>.33+svn2514-3) ...
+Setting up python-wadllib (<span style="color:#ff0;font-weight:bold">1</span>.3.2-2) ...
+Setting up libavahi-client3 (<span style="color:#ff0;font-weight:bold">0</span>.6.31-2) ...
+Setting up fontconfig-config (<span style="color:#ff0;font-weight:bold">2</span>.10.2-2) ...
+Setting up python-oauth (<span style="color:#ff0;font-weight:bold">1</span>.0.1-3) ...
+Setting up libp11-kit0 (<span style="color:#ff0;font-weight:bold">0</span>.18.3-2) ...
+dpkg: dependency problems prevent configuration of libgtk2.0-bin:
+ libgtk2.0-bin depends on libgtk2.0-0 (= <span style="color:#ff0;font-weight:bold">2</span>.24.18-1); however:
+  Package libgtk2.0-0 is not installed.
+dpkg: error processing libgtk2.0-bin (--configure):
+ dependency problems - leaving unconfigured
+Setting up libatk1.0-data (<span style="color:#ff0;font-weight:bold">2</span>.8.0-2) ...
+Setting up libx11-data (<span style="color:#ff0;font-weight:bold">2</span>:1.6.0-1) ...
+Setting up python-httplib2 (<span style="color:#ff0;font-weight:bold">0</span>.7.4-2) ...
+Setting up libpixman-1-0 (<span style="color:#ff0;font-weight:bold">0</span>.26.0-4) ...
+dpkg: dependency problems prevent configuration of gnupg-agent:
+ gnupg-agent depends on pinentry-gtk2 | pinentry-curses | pinentry; however:
+  Package pinentry-gtk2 is not configured yet.
+  Package pinentry-curses is not installed.
+  Package pinentry is not installed.
+  Package pinentry-gtk2 which provides pinentry is not configured yet.
+dpkg: error processing gnupg-agent (--configure):
+ dependency problems - leaving unconfigured
+Setting up python-lazr.restfulclient (<span style="color:#ff0;font-weight:bold">0</span>.13.3-1) ...
+Setting up libglib2.0-0 (<span style="color:#ff0;font-weight:bold">2</span>.36.1-2build1) ...
+No schema files found: doing nothing.
+Setting up python-launchpadlib (<span style="color:#ff0;font-weight:bold">1</span>.9.12-2) ...
+Setting up libxau6 (<span style="color:#ff0;font-weight:bold">1</span>:1.0.8-1) ...
+Setting up wwwconfig-common (<span style="color:#ff0;font-weight:bold">0</span>.2.2) ...
+Setting up shared-mime-info (<span style="color:#ff0;font-weight:bold">1</span>.0-1+b1) ...
+Warning: program compiled against libxml <span style="color:#ff0;font-weight:bold">208</span> using older <span style="color:#ff0;font-weight:bold">207</span>
+Setting up libk5crypto3 (<span style="color:#ff0;font-weight:bold">1</span>.10.1+dfsg-6.1) ...
+Setting up bzr (<span style="color:#ff0;font-weight:bold">2</span>.6.0~bzr6574-1) ...
+Setting up libfontconfig1 (<span style="color:#ff0;font-weight:bold">2</span>.10.2-2) ...
+Setting up dbus (<span style="color:#ff0;font-weight:bold">1</span>.6.12-1) ...
+Starting system message bus: dbus.
+Setting up libthai0 (<span style="color:#ff0;font-weight:bold">0</span>.1.19-2) ...
+Setting up javascript-common (<span style="color:#ff0;font-weight:bold">7</span>) ...
+Setting up libxcb1 (<span style="color:#ff0;font-weight:bold">1</span>.9.1-3) ...
+dpkg: dependency problems prevent configuration of gnupg2:
+ gnupg2 depends on gnupg-agent (= <span style="color:#ff0;font-weight:bold">2</span>.0.20-1); however:
+  Package gnupg-agent is not configured yet.
+dpkg: error processing gnupg2 (--configure):
+ dependency problems - leaving unconfigured
+Setting up libxcb-render0 (<span style="color:#ff0;font-weight:bold">1</span>.9.1-3) ...
+Setting up libharfbuzz0a (<span style="color:#ff0;font-weight:bold">0</span>.9.18-3) ...
+Setting up python-paramiko (<span style="color:#ff0;font-weight:bold">1</span>.7.7.1-3.1) ...
+Setting up libx11-6 (<span style="color:#ff0;font-weight:bold">2</span>:1.6.0-1) ...
+Setting up libatk1.0-0 (<span style="color:#ff0;font-weight:bold">2</span>.8.0-2) ...
+Setting up libgnutls26 (<span style="color:#ff0;font-weight:bold">2</span>.12.23-5) ...
+Setting up libkrb5-3 (<span style="color:#ff0;font-weight:bold">1</span>.10.1+dfsg-6.1) ...
+Setting up libxcb-shm0 (<span style="color:#ff0;font-weight:bold">1</span>.9.1-3) ...
+Setting up fontconfig (<span style="color:#ff0;font-weight:bold">2</span>.10.2-2) ...
+Regenerating fonts cache... <span style="color:#fff;font-weight:bold">done</span>.
+Setting up libgssapi-krb5-2 (<span style="color:#ff0;font-weight:bold">1</span>.10.1+dfsg-6.1) ...
+Setting up libgdk-pixbuf2.0-0 (<span style="color:#ff0;font-weight:bold">2</span>.28.2-1) ...
+Setting up libxext6 (<span style="color:#ff0;font-weight:bold">2</span>:1.3.1-2+deb7u1) ...
+Setting up libxrender1 (<span style="color:#ff0;font-weight:bold">1</span>:0.9.7-1+deb7u1) ...
+Setting up libpango-1.0-0 (<span style="color:#ff0;font-weight:bold">1</span>.32.5-5+b1) ...
+Setting up libxrandr2 (<span style="color:#ff0;font-weight:bold">2</span>:1.3.2-2+deb7u1) ...
+Setting up libxcomposite1 (<span style="color:#ff0;font-weight:bold">1</span>:0.4.4-1) ...
+dpkg: dependency problems prevent configuration of libgpgme11:
+ libgpgme11 depends on gnupg2 (&gt;&gt; <span style="color:#ff0;font-weight:bold">2</span>.0.4); however:
+  Package gnupg2 is not configured yet.
+dpkg: error processing libgpgme11 (--configure):
+ dependency problems - leaving unconfigured
+Setting up libcups2 (<span style="color:#ff0;font-weight:bold">1</span>.5.3-5) ...
+dpkg: dependency problems prevent configuration of python-gpgme:
+ python-gpgme depends on libgpgme11 (&gt;= <span style="color:#ff0;font-weight:bold">1</span>.2.0); however:
+  Package libgpgme11 is not configured yet.
+dpkg: error processing python-gpgme (--configure):
+ dependency problems - leaving unconfigured
+Setting up libxi6 (<span style="color:#ff0;font-weight:bold">2</span>:1.6.1-1+deb7u1) ...
+Setting up libxfixes3 (<span style="color:#ff0;font-weight:bold">1</span>:5.0-4+deb7u1) ...
+Setting up libxdamage1 (<span style="color:#ff0;font-weight:bold">1</span>:1.1.4-1) ...
+Setting up libxft2 (<span style="color:#ff0;font-weight:bold">2</span>.3.1-1) ...
+Setting up libpangoft2-1.0-0 (<span style="color:#ff0;font-weight:bold">1</span>.32.5-5+b1) ...
+Setting up libpangox-1.0-0 (<span style="color:#ff0;font-weight:bold">0</span>.0.2-4) ...
+Setting up libxcursor1 (<span style="color:#ff0;font-weight:bold">1</span>:1.1.14-1) ...
+Setting up libcairo2 (<span style="color:#ff0;font-weight:bold">1</span>.12.14-4) ...
+Setting up libxinerama1 (<span style="color:#ff0;font-weight:bold">2</span>:1.1.2-1+deb7u1) ...
+Setting up libpangocairo-1.0-0 (<span style="color:#ff0;font-weight:bold">1</span>.32.5-5+b1) ...
+Setting up libpangoxft-1.0-0 (<span style="color:#ff0;font-weight:bold">1</span>.32.5-5+b1) ...
+Setting up libpango1.0-0 (<span style="color:#ff0;font-weight:bold">1</span>.32.5-5+b1) ...
+Errors were encountered <span style="color:#fff;font-weight:bold">while</span> processing:
+ pinentry-gtk2
+ libgtk2.0-bin
+ gnupg-agent
+ gnupg2
+ libgpgme11
+ python-gpgme</code></pre></div>
+<p>All failed packaged was list in end of result. Now, we can just remove it</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[chef]:-$ sudo apt-get remove --purge pinentry-gtk2 libgtk2.0-bin gnupg-agent gnupg2 libgpgme11 python-gpgme</code></pre></div>
+<p>Problem solved!!!</p>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen</a></h4>
+  
+  <p>A father, husband, and passinate programmer</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=apt-get%20install%20failed&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2013%2f07%2f09%2ffix-bug-relate-to-debian-apt-get.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2013%2f07%2f09%2ffix-bug-relate-to-debian-apt-get.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2013%2f07%2f09%2ffix-bug-relate-to-debian-apt-get.html&amp;description=apt-get%20install%20failed"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2013%2f07%2f09%2ffix-bug-relate-to-debian-apt-get.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2013\/07\/09\/fix-bug-relate-to-debian-apt-get.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

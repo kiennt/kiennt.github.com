@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/python-object-and-dictionary-convertion.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Python object model"/>
+<meta name="twitter:description" content="&ldquo;In Python, everything is object&rdquo;.
+
+What does it means? Is that like other Programming Language (for example Java),
+everything in Python is instance of Base Class?
+If it is, what is the Base Class in Python? I have heard about object
+class in Python, is that Base Class?
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Python object model &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/23/python-object-models.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-23T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="python" />
+    
+    <meta property="og:article:tag" content="programming" />
+    
+    
+
+    <title>
+       Python object model &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/23/python-object-models.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/python-object-and-dictionary-convertion.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Python object model</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-23T00:00:00Z">
+            Jun 23, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/python/">#python</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/programming/">#programming</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>&ldquo;In Python, everything is object&rdquo;.</p>
+
+<p>What does it means? Is that like other Programming Language (for example Java),
+everything in Python is instance of Base Class?
+If it is, what is the Base Class in Python? I have heard about <code>object</code>
+class in Python, is that Base Class?</p>
+
+<p></p>
+
+<h3 id="old-style-and-new-style-class-in-python">Old-style and new-style class in Python</h3>
+
+<p>Well, with Python, it quite complex in here. Python have two model
+<code>old-style</code> class and <code>new-style</code> class.
+In fact, in old Python, there is not explicit base class for every
+object in Python.
+But from 2.2, with introduction of <code>new-style</code> class, we have (or must)
+make every object is subclass of <code>object</code>.</p>
+
+<p>Up to Python 2.1, <code>old-style</code> classes were the only flavour available
+for user. The concept of <code>old-style</code> class is unrelated to concept of
+type. If x is instance of an old-style class, <code>x.__class__</code> will reference to
+the class of x. But type(x) is not, it is always <code>&lt;type 'instance'&gt;</code>.
+Let look at the code below.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#007f7f"># old-style class was define by statement:</span>
+    <span style="color:#007f7f">#   class &lt;class-name&gt;: &lt;class definition body&gt;</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> A:
+            <span style="color:#fff;font-weight:bold">pass</span>
+    <span style="color:#007f7f"># type of class A is &#39;type&#39; because &#39;type&#39; is base-class in Python</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(A)
+    &lt;<span style="color:#fff;font-weight:bold">type</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;type&#39;</span>&gt;
+
+    <span style="color:#007f7f"># make an instance of A</span>
+    &gt;&gt;&gt; a = A()
+    <span style="color:#007f7f"># a.__class__ reference to class A</span>
+    &gt;&gt;&gt; a.__class__
+    &lt;<span style="color:#fff;font-weight:bold">class</span> __main__.A at <span style="color:#ff0;font-weight:bold">0x10aea6ce8</span>&gt;
+    <span style="color:#007f7f"># bute type of a is not A but &#39;instance&#39;</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(a)
+    &lt;<span style="color:#fff;font-weight:bold">type</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;instance&#39;</span>&gt;
+    <span style="color:#007f7f"># &#39;instance&#39; still is &#39;type&#39; class</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(<span style="color:#fff;font-weight:bold">type</span>(a))
+    &lt;<span style="color:#fff;font-weight:bold">type</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;type&#39;</span>&gt;</code></pre></div>
+<p>New-style class was introduced from Python 2.2.
+It was motivated from provide an unified object model for Python.
+In new-style class, <code>object</code> class was introduced.
+Everything will inheritance from <code>object</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">object</span>.__class__
+    &lt;<span style="color:#fff;font-weight:bold">type</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;type&#39;</span>&gt;
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(<span style="color:#fff;font-weight:bold">object</span>)
+    &lt;<span style="color:#fff;font-weight:bold">type</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;type&#39;</span>&gt;</code></pre></div>
+<p><code>new-style</code> class was define by inheritance from <code>object</code> class.
+In contrast with <code>old-style</code> class, if x is instance of <code>new-style</code> class,
+both x.<strong>class</strong> and type(x) will reference to the class of x.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> A(<span style="color:#fff;font-weight:bold">object</span>): <span style="color:#fff;font-weight:bold">pass</span>
+    &gt;&gt;&gt; A.__class__
+    &lt;<span style="color:#fff;font-weight:bold">type</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;type&#39;</span>&gt;
+    &gt;&gt;&gt; x = A()
+    &gt;&gt;&gt; x.__class__
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(x)
+    &lt;<span style="color:#fff;font-weight:bold">type</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;A&#39;</span>&gt;</code></pre></div>
+<p>For compatibility with <code>old-style</code>, classes are still <code>old-style</code>
+as default. If we want to using <code>new-stlye</code>, we need define class
+is subclass from <code>object</code></p>
+
+<h3 id="the-diffirence-between-old-style-and-new-style-class">The diffirence between <code>old-style</code> and <code>new-style</code> class</h3>
+
+<p>The clearly dirrirence between to styles was seen in type system.</p>
+
+<p>Let look at how <code>old-style</code> class and <code>new-style</code> class handle
+multiple inheritance. &ldquo;Multiple inheritance&rdquo; is capalicty a class
+can inherit from many other classes. If A is inherit from B, A is subclass
+(child class, derived class) of B, and B is superclas (base class, parent
+class) of A.</p>
+
+<p>Multiple class allow a class A can have many parents (with my opinion,
+I dont like multiple inheritance at all, it quite wierd when a class
+can have many parents. To solve same problem, other programming language
+support another model like interface in Java, or mixins in Ruby.
+Personally, I really like mixins model of Ruby).</p>
+
+<p>In python object model, every class have <code>__bases__</code> attribute which
+store all parent class in order of occurence in inheritance</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> A: <span style="color:#fff;font-weight:bold">pass</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> B: <span style="color:#fff;font-weight:bold">pass</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> C(A, B): <span style="color:#fff;font-weight:bold">pass</span>
+    &gt;&gt;&gt; C.__bases__
+    (&lt;<span style="color:#fff;font-weight:bold">class</span> __main__.A at <span style="color:#ff0;font-weight:bold">0x10aea6ce8</span>&gt;, &lt;<span style="color:#fff;font-weight:bold">class</span> __main__.B at <span style="color:#ff0;font-weight:bold">0x10af8de20</span>&gt;)</code></pre></div>
+<p>So, what is the problem with multiple inheritance?</p>
+
+<p>Problem with multiple inheritance is order or superclass.
+Why this order is important?
+Because when an instance of subclass try to access an attribute
+(variable or function). Firstly it will look its space to find that
+attribute, if the attribute is not found, it keep looking in class space.
+If still not found, the searching method continue with superclass space.
+When a class have many superclass, the order of superclass is the
+order in searching method.
+In old-style class, order of superclass is depth-first, left-to-right
+in the order of occurence in the bases list</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> A:
+          <span style="color:#fff;font-weight:bold">def</span> test(self): <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;A&#34;</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> B(A):
+          <span style="color:#fff;font-weight:bold">def</span> test(self): <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;B&#34;</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> C(A)
+          <span style="color:#fff;font-weight:bold">def</span> test(self): <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;C&#34;</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> D(B, C): <span style="color:#fff;font-weight:bold">pass</span>
+    <span style="color:#007f7f"># order of D.__bases__ is (B, C) so D.test =&gt; B.test</span>
+    &gt;&gt;&gt; D().test()
+    <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;B&#34;</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> E(C, B): <span style="color:#fff;font-weight:bold">pass</span>
+    <span style="color:#007f7f"># order of E.__bases__ is (C, B) so E.test =&gt; C.test</span>
+    &gt;&gt;&gt; E().test()
+    <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;C&#34;</span>
+
+    <span style="color:#007f7f"># so what if we make an class is inherited from D, E</span>
+    <span style="color:#007f7f"># note that, D and E are inherited from 2 class B, C with reverse order</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> F(D, E): <span style="color:#fff;font-weight:bold">pass</span>
+    <span style="color:#007f7f"># in old-style class, it does not matter, the searching method</span>
+    <span style="color:#007f7f"># only care about order of superclass in __bases__</span>
+    <span style="color:#007f7f"># so now F.test =&gt; D.test =&gt; B.test</span>
+    &gt;&gt;&gt; F().test()
+    <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;B&#34;</span>
+
+    <span style="color:#007f7f"># even if we make an class is inherited from A, D, E</span>
+    <span style="color:#007f7f"># it still works and test() method will be test() method of A</span>
+    &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> G(A, D, E): <span style="color:#fff;font-weight:bold">pass</span>
+    &gt;&gt;&gt; G().test()
+    <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;A&#34;</span></code></pre></div>
+<p>Old-style class method resolution is quite simple and easy to understand, right?
+But if we follow this kind of rules, sometime we will make a mistake when
+inheritance. For instance, we make an class G which is inherited from A, D, and
+E, while A is parent of D and E. It should throw an error in this context to
+prevent the circle inheritance like that</p>
+
+<p>ANd new-style class solve this problem. New-style class have MRO (Method
+Resolution Order) was introduced from Python 2.3.
+The algorithm of MRO can describled as below</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">def</span> mro(cls):
+    <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    Return ordering of superclass of cls
+</span><span style="color:#0ff;font-weight:bold">    This ordering was used when we want to access class instance atrribute
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    `cls`: class type we want to resolve
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    @raise `TypeError` if cannot resolution superclass order
+</span><span style="color:#0ff;font-weight:bold">    @return `list` of class
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    bases_cls = cls.__bases__
+    mro_base_lists = [mro(base_cls) <span style="color:#fff;font-weight:bold">for</span> base_cls in bases_cls]
+    mro_list = [cls]
+    <span style="color:#fff;font-weight:bold">while</span> mro_base_lists:
+        <span style="color:#007f7f"># find the good head</span>
+        <span style="color:#007f7f"># good head is head of a list which is not is tail of any list in mro_base_lists</span>
+        list_head = (x[<span style="color:#ff0;font-weight:bold">0</span>] <span style="color:#fff;font-weight:bold">for</span> x in mro_base_lists)
+        set_tails = <span style="color:#fff;font-weight:bold">set</span>()
+        <span style="color:#fff;font-weight:bold">for</span> x in mro_base_lists:
+            set_tails.update(x[<span style="color:#ff0;font-weight:bold">1</span>:])
+
+        good_head = None
+        <span style="color:#fff;font-weight:bold">for</span> head in list_head:
+            <span style="color:#fff;font-weight:bold">if</span> head not in set_tails:
+                good_head = head
+                <span style="color:#fff;font-weight:bold">break</span>
+
+        <span style="color:#007f7f"># if cannot find good_head, raise TypeError</span>
+        <span style="color:#fff;font-weight:bold">if</span> not good_head:
+            <span style="color:#fff;font-weight:bold">raise</span> TypeError
+        <span style="color:#fff;font-weight:bold">else</span>:
+            <span style="color:#007f7f"># add to mro_list</span>
+            mro_list.append(good_head)
+
+            <span style="color:#007f7f"># remove good_head in all list and add to mro_list</span>
+            <span style="color:#fff;font-weight:bold">for</span> alist in mro_base_lists:
+                <span style="color:#fff;font-weight:bold">try</span>:
+                    alist.remove(good_head)
+                <span style="color:#fff;font-weight:bold">except</span> Exception:
+                    <span style="color:#fff;font-weight:bold">pass</span>
+            mro_base_lists = [x <span style="color:#fff;font-weight:bold">for</span> x in mro_base_lists <span style="color:#fff;font-weight:bold">if</span> x]
+    <span style="color:#fff;font-weight:bold">return</span> mro_list
+
+<span style="color:#fff;font-weight:bold">class</span> A: <span style="color:#fff;font-weight:bold">pass</span>
+<span style="color:#fff;font-weight:bold">class</span> B(A): <span style="color:#fff;font-weight:bold">pass</span>
+<span style="color:#fff;font-weight:bold">class</span> C(A): <span style="color:#fff;font-weight:bold">pass</span>
+<span style="color:#fff;font-weight:bold">class</span> D(B, C): <span style="color:#fff;font-weight:bold">pass</span>
+<span style="color:#fff;font-weight:bold">class</span> E(C, B): <span style="color:#fff;font-weight:bold">pass</span>
+<span style="color:#fff;font-weight:bold">class</span> F(D, E): <span style="color:#fff;font-weight:bold">pass</span>
+
+<span style="color:#fff;font-weight:bold">def</span> test_mro():
+    <span style="color:#fff;font-weight:bold">assert</span> mro(A) == [A]
+    <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;Test1 passed&#34;</span>
+
+    <span style="color:#fff;font-weight:bold">assert</span> mro(B) == [B, A]
+    <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;Test2 passed&#34;</span>
+
+    <span style="color:#fff;font-weight:bold">assert</span> mro(C) == [C, A]
+    <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;Test 3 passed&#34;</span>
+
+    <span style="color:#fff;font-weight:bold">assert</span> mro(D) == [D, B, C, A]
+    <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;Test 4 passed&#34;</span>
+
+    <span style="color:#fff;font-weight:bold">assert</span> mro(E) == [E, C, B, A]
+    <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;Test 5 passed&#34;</span>
+
+    <span style="color:#fff;font-weight:bold">try</span>:
+        mro(F)
+    <span style="color:#fff;font-weight:bold">except</span> Exception <span style="color:#fff;font-weight:bold">as</span> e:
+        <span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">isinstance</span>(e, TypeError)
+        <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;Test 6 passed&#34;</span>
+
+test_mro()</code></pre></div>
+<p>The idea of MRO algorithm is sort baseclasses with condition:
+If B is subclass of C, B always stand before C in list.
+That is the reason why we have a TypeErorr if we define a class
+D(B, C) and E(C, B) and after that F(D, E).</p>
+
+<p>For more understand how MRO works, you should read
+<a href="http://www.python.org/download/releases/2.3/mro/">explaination in python docs</a></p>
+
+<p>To conclusion, ordering of baseclass is not only diffirence between
+new-style and old-style class. I will write about this topic in next article.</p>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Python%20object%20model&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f23%2fpython-object-models.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f23%2fpython-object-models.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f23%2fpython-object-models.html&amp;description=Python%20object%20model"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f23%2fpython-object-models.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/23\/python-object-models.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

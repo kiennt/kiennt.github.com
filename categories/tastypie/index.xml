@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tastypie on </title>
+    <link>http://kiennt.com/categories/tastypie/</link>
+    <description>Recent content in Tastypie on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Tue, 16 Oct 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/categories/tastypie/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Authentication django-tastypie in right way</title>
+      <link>http://kiennt.com/blog/2012/10/16/authenticated-django-tastypie-in-right-way.html</link>
+      <pubDate>Tue, 16 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/10/16/authenticated-django-tastypie-in-right-way.html</guid>
+      <description>&lt;p&gt;When using django-tastypie, I got some problems with security.
+In my pinterest-clone application, I build a pin model.
+A &lt;code&gt;pin&lt;/code&gt; is a image with a description and tags for it`&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

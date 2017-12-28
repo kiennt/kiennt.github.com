@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://kiennt.com/blog/2014/03/28/hacking-pinterest.html</loc>
+    <lastmod>2014-03-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2013/03/13/how-to-deploy-a-branch-to-heroku.html</loc>
+    <lastmod>2013-03-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html</loc>
+    <lastmod>2013-01-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/11/07/run-celery-task-synchronous-when-testing-django.html</loc>
+    <lastmod>2012-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/10/25/django-show-sql-query-in-shell.html</loc>
+    <lastmod>2012-10-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/10/16/authenticated-django-tastypie-in-right-way.html</loc>
+    <lastmod>2012-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/08/03/mysqldump-without-password.html</loc>
+    <lastmod>2012-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/07/09/use-grep-to-find-content-in-linux.html</loc>
+    <lastmod>2012-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/07/05/watch-directiory-change-with-python-watchdog.html</loc>
+    <lastmod>2012-07-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/07/01/kill-process-by-grep-name-with-awk.html</loc>
+    <lastmod>2012-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/30/regex-in-vim.html</loc>
+    <lastmod>2012-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html</loc>
+    <lastmod>2012-06-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html</loc>
+    <lastmod>2012-06-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</loc>
+    <lastmod>2012-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie.html</loc>
+    <lastmod>2012-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html</loc>
+    <lastmod>2012-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</loc>
+    <lastmod>2012-06-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/25/unix-change-time.html</loc>
+    <lastmod>2012-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/25/config-virtualhost-with-nginx.html</loc>
+    <lastmod>2012-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/23/python-object-models.html</loc>
+    <lastmod>2012-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/23/weekend-with-python-part3.html</loc>
+    <lastmod>2012-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/22/fabric-run-with-specify-user.html</loc>
+    <lastmod>2012-06-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/21/macosx-2d-dock.html</loc>
+    <lastmod>2012-06-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/19/manager-daemon-process-with-daemon-tools.html</loc>
+    <lastmod>2012-06-19T08:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html</loc>
+    <lastmod>2012-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html</loc>
+    <lastmod>2012-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/17/weekend-with-python-part2.html</loc>
+    <lastmod>2012-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/16/weird-behavior-with-nosetest.html</loc>
+    <lastmod>2012-06-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/15/weekend-with-python-part1.html</loc>
+    <lastmod>2012-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/blog/2012/06/14/python-object-and-dictionary-convertion.html</loc>
+    <lastmod>2012-06-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/</loc>
+    <lastmod>2014-03-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/booting/</loc>
+    <lastmod>2012-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/celery/</loc>
+    <lastmod>2012-11-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/database/</loc>
+    <lastmod>2012-08-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/database/</loc>
+    <lastmod>2012-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/debian/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/debian/</loc>
+    <lastmod>2012-06-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/django/</loc>
+    <lastmod>2012-11-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/git/</loc>
+    <lastmod>2013-03-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/hacking/</loc>
+    <lastmod>2014-03-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/macosx/</loc>
+    <lastmod>2012-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/mysql/</loc>
+    <lastmod>2012-08-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/postgresql/</loc>
+    <lastmod>2012-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/post/</loc>
+    <lastmod>2014-03-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/programming/</loc>
+    <lastmod>2012-10-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/programming/</loc>
+    <lastmod>2012-06-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/python/</loc>
+    <lastmod>2012-11-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/python/</loc>
+    <lastmod>2012-06-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/regular-expresion/</loc>
+    <lastmod>2012-06-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/server/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/server/</loc>
+    <lastmod>2012-06-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/shell/</loc>
+    <lastmod>2012-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/</loc>
+    <lastmod>2012-06-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/tastypie/</loc>
+    <lastmod>2012-10-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/testing/</loc>
+    <lastmod>2012-06-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/tips/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/tips/</loc>
+    <lastmod>2012-06-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/unix/</loc>
+    <lastmod>2013-01-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/vagrant/</loc>
+    <lastmod>2012-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/categories/vim/</loc>
+    <lastmod>2012-06-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kiennt.com/tags/virtual-machine/</loc>
+    <lastmod>2012-06-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

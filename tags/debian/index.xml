@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Debian on </title>
+    <link>http://kiennt.com/tags/debian/</link>
+    <description>Recent content in Debian on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Tue, 19 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/debian/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Debian run script at startup time</title>
+      <link>http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html</link>
+      <pubDate>Tue, 19 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/19/debian-run-script-at-startup.html</guid>
+      <description>&lt;p&gt;When managing a server, we sometimes want when a server boots up, it also starts some services automatically. Especially if you are running a web application, you will want to run: web server, database server, your app instances, your background queue manager, &amp;hellip; and many other things.&lt;/p&gt;
+
+&lt;p&gt;This article will write about how to do these kinds of things with &lt;code&gt;debian&lt;/code&gt; (please take a look at my other article about &lt;a href=&#34;http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html&#34;&gt;config debian virtual machine&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

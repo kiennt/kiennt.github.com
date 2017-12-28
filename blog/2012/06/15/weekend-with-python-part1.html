@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/python-weekend.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Weeken with python (part 1)"/>
+<meta name="twitter:description" content="In this serial, I write about what I learned about Python over the weekend.
+This week, I talked about (1) what is different between static method and
+class method, and (2) testing in python.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Weeken with python (part 1) &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/15/weekend-with-python-part1.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-15T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="python" />
+    
+    <meta property="og:article:tag" content="programming" />
+    
+    
+
+    <title>
+       Weeken with python (part 1) &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/15/weekend-with-python-part1.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/python-weekend.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Weeken with python (part 1)</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-15T00:00:00Z">
+            Jun 15, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/python/">#python</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/programming/">#programming</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>In this serial, I write about what I learned about Python over the weekend.
+This week, I talked about (1) what is different between <code>static method</code> and
+<code>class method</code>, and (2) testing in python.</p>
+
+<p></p>
+
+<h3 id="staticmethod-and-classmethod">@staticmethod and @classmethod</h3>
+
+<p>When programming with python, you will see @staticmethod and @classmethod.
+What is the different?</p>
+
+<p>Both @staticmethod and @classmethod are like static methods in Java.
+They are a function (method) of a class.
+For example, if you have a class name <code>A</code>, which define a method <code>method_1</code> is static,
+you can call this method without creating an instance of <code>A</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> A(<span style="color:#fff;font-weight:bold">object</span>):
+        class_var = []
+
+        @staticmethod
+        <span style="color:#fff;font-weight:bold">def</span> static_method_1():
+            A.class_var.add(<span style="color:#ff0;font-weight:bold">10</span>)
+            <span style="color:#fff;font-weight:bold">print</span> A.class_var
+            <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;static method 1&#34;</span>
+
+        @classmethod
+        <span style="color:#fff;font-weight:bold">def</span> class_method_1():
+            <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">            This will make an error when you run like
+</span><span style="color:#0ff;font-weight:bold">            TypeError: class_method_1() takes no arguments (1 given)
+</span><span style="color:#0ff;font-weight:bold">            &#34;&#34;&#34;</span>
+            <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;class method 1&#34;</span>
+
+        @classmethod
+        <span style="color:#fff;font-weight:bold">def</span> class_method_2(klass):
+            <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">            This is fine
+</span><span style="color:#0ff;font-weight:bold">            &#34;&#34;&#34;</span>
+            <span style="color:#fff;font-weight:bold">print</span> klass.A
+            <span style="color:#fff;font-weight:bold">print</span> <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;class method 2&#34;</span>
+&gt;&gt;&gt;&gt; A.static_method_1()
+[<span style="color:#ff0;font-weight:bold">10</span>]
+static method <span style="color:#ff0;font-weight:bold">1</span>
+&gt;&gt;&gt;&gt; A.class_method_1()
+TypeError: class_method_1() takes no arguments (<span style="color:#ff0;font-weight:bold">1</span> given)
+&gt;&gt;&gt;&gt; A.class_method_2
+[<span style="color:#ff0;font-weight:bold">10</span>]
+<span style="color:#fff;font-weight:bold">class</span> method <span style="color:#ff0;font-weight:bold">2</span></code></pre></div>
+<p>The only different between <code>@staticmethod</code> and <code>@classmethod</code> is <code>@classmethod</code>
+must have first argument which is the class itself!</p>
+
+<h3 id="test-framework-with-python">Test framework with python</h3>
+
+<p><a href="https://github.com/nose-devs/nose">nose</a> is a test framework written in python</p>
+
+<p>To install <code>nose</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo pip install nose</code></pre></div>
+<p>When working with our company project, I have to work with it.
+Here is test case template was used</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> unittest
+
+<span style="color:#fff;font-weight:bold">def</span> setup()
+    <span style="color:#fff;font-weight:bold">pass</span>
+
+<span style="color:#fff;font-weight:bold">def</span> teardown()
+    <span style="color:#fff;font-weight:bold">pass</span>
+
+<span style="color:#fff;font-weight:bold">class</span> ModuleWantToTest(<span style="color:#fff;font-weight:bold">object</span>):
+    <span style="color:#fff;font-weight:bold">def</span> test_function1(self):
+        <span style="color:#fff;font-weight:bold">pass</span>
+
+    <span style="color:#fff;font-weight:bold">def</span> test_function2(self):
+        <span style="color:#fff;font-weight:bold">pass</span></code></pre></div>
+<p>Next, you will want to test like this:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nose test_file.py</code></pre></div>
+<p>Note that: two functions <code>setup</code> and <code>teardown</code> of a module will run before and after every class test cases.
+If you want to make <code>setup</code> and <code>teardown</code> for every method in class, you must name it like <code>setUp</code> and <code>tearDown</code>.
+and your TestSuiteClass must be an inheritance from <code>unittest.TestCase</code>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> unittest
+<span style="color:#fff;font-weight:bold">import</span> nose
+
+a = []
+
+<span style="color:#fff;font-weight:bold">def</span> setup():
+    <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    This method will run before any class Test
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    <span style="color:#fff;font-weight:bold">with</span> <span style="color:#fff;font-weight:bold">open</span>(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;test_log&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;w&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> f:
+        f.write(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;setup module</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span>)
+    a.extend([<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">30</span>])
+
+<span style="color:#fff;font-weight:bold">def</span> teardown():
+    <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">    If setup was run successful
+</span><span style="color:#0ff;font-weight:bold">    This method will will run after class Test
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    <span style="color:#fff;font-weight:bold">with</span> <span style="color:#fff;font-weight:bold">open</span>(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;test_log&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;a&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> f:
+        f.write(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;teardown module </span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> % a)
+    <span style="color:#fff;font-weight:bold">for</span> i in <span style="color:#fff;font-weight:bold">xrange</span>(<span style="color:#ff0;font-weight:bold">0</span>, <span style="color:#fff;font-weight:bold">len</span>(a)):
+        a.pop()
+
+<span style="color:#fff;font-weight:bold">class</span> SampleTestModule(unittest.TestCase):
+    b = []
+
+    @classmethod
+    <span style="color:#fff;font-weight:bold">def</span> setup_class(klass):
+        <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">        This method will run before any method Test of SampleTestModule
+</span><span style="color:#0ff;font-weight:bold">        &#34;&#34;&#34;</span>
+        <span style="color:#fff;font-weight:bold">with</span> <span style="color:#fff;font-weight:bold">open</span>(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;test_log&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;a&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> f:
+            f.write(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;setup class</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span>)
+        klass.b.extend([<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>])
+        <span style="color:#fff;font-weight:bold">pass</span>
+
+    @classmethod
+    <span style="color:#fff;font-weight:bold">def</span> teardown_class(klass):
+        <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;
+</span><span style="color:#0ff;font-weight:bold">        This method will run after test and setup_class was run sucessful
+</span><span style="color:#0ff;font-weight:bold">        &#34;&#34;&#34;</span>
+        <span style="color:#fff;font-weight:bold">with</span> <span style="color:#fff;font-weight:bold">open</span>(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;test_log&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;a&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> f:
+            f.write(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;teardown class</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span>)
+        klass.b.pop()
+        klass.b.pop()
+        a.pop()
+        <span style="color:#fff;font-weight:bold">pass</span>
+
+    <span style="color:#fff;font-weight:bold">def</span> setUp(self):
+        <span style="color:#fff;font-weight:bold">with</span> <span style="color:#fff;font-weight:bold">open</span>(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;test_log&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;a&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> f:
+            f.write(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;setup method</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span>)
+        self.b.extend([<span style="color:#ff0;font-weight:bold">40</span>, <span style="color:#ff0;font-weight:bold">50</span>])
+
+    <span style="color:#fff;font-weight:bold">def</span> tearDown(self):
+        <span style="color:#fff;font-weight:bold">with</span> <span style="color:#fff;font-weight:bold">open</span>(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;test_log&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;a&#39;</span>) <span style="color:#fff;font-weight:bold">as</span> f:
+            f.write(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;teardown method</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span>)
+        self.b.pop()
+        self.b.pop()
+
+    <span style="color:#fff;font-weight:bold">def</span> test_simple(self):
+        <span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">len</span>(a) == <span style="color:#ff0;font-weight:bold">3</span>
+        <span style="color:#fff;font-weight:bold">assert</span> a == [<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">30</span>]
+        <span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">len</span>(self.b) == <span style="color:#ff0;font-weight:bold">4</span>
+        <span style="color:#fff;font-weight:bold">assert</span> self.b == [<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">40</span>, <span style="color:#ff0;font-weight:bold">50</span>]
+
+    <span style="color:#fff;font-weight:bold">def</span> test_simple2(self):
+        <span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">len</span>(a) == <span style="color:#ff0;font-weight:bold">3</span>
+        <span style="color:#fff;font-weight:bold">assert</span> a == [<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">30</span>]
+        <span style="color:#007f7f"># change a</span>
+        a.append(<span style="color:#ff0;font-weight:bold">1</span>)
+
+        <span style="color:#007f7f"># because teardow will call after test_simple,</span>
+        <span style="color:#007f7f"># and setup_class re-run before test_simple2</span>
+        <span style="color:#007f7f"># so now b == [10, 20, 40, 50]</span>
+        <span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">len</span>(self.b) == <span style="color:#ff0;font-weight:bold">4</span>
+        <span style="color:#fff;font-weight:bold">assert</span> self.b == [<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">40</span>, <span style="color:#ff0;font-weight:bold">50</span>]
+
+
+<span style="color:#fff;font-weight:bold">class</span> TestClass2(unittest.TestCase):
+    <span style="color:#fff;font-weight:bold">def</span> test_method(self):
+        <span style="color:#fff;font-weight:bold">print</span> a
+        <span style="color:#fff;font-weight:bold">assert</span> <span style="color:#fff;font-weight:bold">len</span>(a) == <span style="color:#ff0;font-weight:bold">3</span>
+        <span style="color:#fff;font-weight:bold">assert</span> a == [<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">30</span>]</code></pre></div>
+<p>Run this code, and check the log file we will see:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; python test_module.py
+$&gt; cat test_log
+setup module
+setup class
+setup method
+teardown method
+setup method
+teardown method
+teardown class
+teardown module [<span style="color:#ff0;font-weight:bold">10</span>, <span style="color:#ff0;font-weight:bold">20</span>, <span style="color:#ff0;font-weight:bold">30</span>]</code></pre></div>
+<p>It means  <code>setup</code> function of a module will run first, after that is <code>setup_class</code> function.
+And with every test cases, <code>setUp</code> function will be called at the beginning, after that, the real test case will be called.
+<code>tearDown</code> function will be called regardless of the result of the test case.
+NOTE again 2 functions must be <code>setUp</code> and<code>tearDown</code> (it is camelCase but snake_case as PEP8 suggested)</p>
+
+<p>But when in your test module, you want to import some other module, how you can do it?
+Remember that, when you using <code>nose test_file.py</code>, the environment of python is the path of <code>nose</code> (which can get by <code>which nose</code>).
+To solve it, you will want to add path of library to python path
+Currently, I found 2 options:</p>
+
+<ul>
+<li>Export to environment variable <code>PYTHONPATH</code></li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#fff;font-weight:bold">export</span> PYTHONPATH=path__to__library</code></pre></div>
+<p>Every time you run the test on another bash shell, you must retype this command.</p>
+
+<ul>
+<li>You do not need to retype every time you run on another bash shell.
+You add it on directly on you test file by the below snippet</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">import</span> os
+<span style="color:#fff;font-weight:bold">import</span> sys
+
+library__path = path__to__library
+<span style="color:#fff;font-weight:bold">if</span> library_path is not in sys.path:
+    sys.path.insert(library_path, <span style="color:#ff0;font-weight:bold">0</span>)</code></pre></div>
+<p>Most of the time, you want to structure your project folder like that:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">project_name/
+   src/
+   test/</code></pre></div>
+<p>So you will want to add <code>src</code> directory in python path:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">current_path = os.path.dirname(__file__)
+src_path = os.path.join(curent_path, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;..&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;src&#39;</span>)
+<span style="color:#fff;font-weight:bold">if</span> src_path not in sys.path:
+    sys.path.insert(src_path, <span style="color:#ff0;font-weight:bold">0</span>)</code></pre></div>
+<p>But it still got some annoying because the code to add <code>src path</code> must be provided in every test modules.
+The better solution should have a script name <code>test</code> which include <code>src path</code>.
+And this script has options run all test modules or single test module.</p>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Weeken%20with%20python%20%28part%201%29&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f15%2fweekend-with-python-part1.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f15%2fweekend-with-python-part1.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f15%2fweekend-with-python-part1.html&amp;description=Weeken%20with%20python%20%28part%201%29"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f15%2fweekend-with-python-part1.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/15\/weekend-with-python-part1.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

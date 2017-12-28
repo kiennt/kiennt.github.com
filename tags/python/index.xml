@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on </title>
+    <link>http://kiennt.com/tags/python/</link>
+    <description>Recent content in Python on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Fri, 29 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using selenium with headless browser</title>
+      <link>http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html</link>
+      <pubDate>Fri, 29 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html</guid>
+      <description>&lt;p&gt;My note about setting selenium&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python object model</title>
+      <link>http://kiennt.com/blog/2012/06/23/python-object-models.html</link>
+      <pubDate>Sat, 23 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/23/python-object-models.html</guid>
+      <description>&lt;p&gt;&amp;ldquo;In Python, everything is object&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;What does it means? Is that like other Programming Language (for example Java),
+everything in Python is instance of Base Class?
+If it is, what is the Base Class in Python? I have heard about &lt;code&gt;object&lt;/code&gt;
+class in Python, is that Base Class?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Weeken with python (part 3)</title>
+      <link>http://kiennt.com/blog/2012/06/23/weekend-with-python-part3.html</link>
+      <pubDate>Sat, 23 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/23/weekend-with-python-part3.html</guid>
+      <description>&lt;p&gt;In this serial, I write about what I learned about Python over the weekend.
+This week, I talked about (1) how to write a function to find an element in a
+list , (2) remove function of list, and (3) the different between &lt;code&gt;__getattr__&lt;/code&gt;
+and &lt;code&gt;__getattribute__&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Weeken with python (part 2)</title>
+      <link>http://kiennt.com/blog/2012/06/17/weekend-with-python-part2.html</link>
+      <pubDate>Sun, 17 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/17/weekend-with-python-part2.html</guid>
+      <description>&lt;p&gt;In this serial, I write about what I learned about Python over the weekend.
+This week, I talk about 2 problems (1) function argument &amp;rsquo;s default value
+and (2) function variable argument.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Weird behavior of nosetest</title>
+      <link>http://kiennt.com/blog/2012/06/16/weird-behavior-with-nosetest.html</link>
+      <pubDate>Sat, 16 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/16/weird-behavior-with-nosetest.html</guid>
+      <description>&lt;p&gt;In this article, I shared my experience with a weird bug in &lt;code&gt;nosetests&lt;/code&gt;. Let &amp;rsquo;s
+see what is it, and what we could do to fix/avoid it in future.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Weeken with python (part 1)</title>
+      <link>http://kiennt.com/blog/2012/06/15/weekend-with-python-part1.html</link>
+      <pubDate>Fri, 15 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/15/weekend-with-python-part1.html</guid>
+      <description>&lt;p&gt;In this serial, I write about what I learned about Python over the weekend.
+This week, I talked about (1) what is different between &lt;code&gt;static method&lt;/code&gt; and
+&lt;code&gt;class method&lt;/code&gt;, and (2) testing in python.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python object and dictionary convertion</title>
+      <link>http://kiennt.com/blog/2012/06/14/python-object-and-dictionary-convertion.html</link>
+      <pubDate>Thu, 14 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/14/python-object-and-dictionary-convertion.html</guid>
+      <description>&lt;p&gt;When programing in Python, sometimes you want to convert an object to
+dictionary and vise versal. In this article, I share my expericences
+to do that.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

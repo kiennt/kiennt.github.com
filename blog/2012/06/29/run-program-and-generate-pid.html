@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/server.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Run program in UNIX and make pidfile for it"/>
+<meta name="twitter:description" content="We sometime want to run a program and after than stop it.
+
+For example, at boot time, we start an selenium.
+But after that, we want to stop it.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Run program in UNIX and make pidfile for it &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-29T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="tips" />
+    
+    <meta property="og:article:tag" content="server" />
+    
+    
+
+    <title>
+       Run program in UNIX and make pidfile for it &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/server.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Run program in UNIX and make pidfile for it</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-29T00:00:00Z">
+            Jun 29, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/tips/">#tips</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/server/">#server</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>We sometime want to run a program and after than stop it.</p>
+
+<p>For example, at boot time, we start an <a href="http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html">selenium</a>.
+But after that, we want to stop it.</p>
+
+<p></p>
+
+<p>The question is, how we could stop it?
+One approach is using <code>ps -ef | grep</code> command.
+But it hard to match exactly program we want to stop.
+I think the correct way is using <code>pidfile</code>.
+<code>pidfile</code> is the file which store a process id
+(the process id of program we start)</p>
+
+<p>This post will tell you 2 ways to create pid file</p>
+
+<h3 id="1-using-start-stop-daemon-tool">1. Using <code>start-stop-daemon</code> tool</h3>
+
+<p>Syntax of <code>start-stop-daemon</code> is</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; start-stop-daemon --start --chuid &lt;username&gt; --background <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>     --make-pidfile --pidfile /var/run/&lt;pidfile&gt;.pid --exec $PROGRAM -- $PROGRAM-ARGUMENT</code></pre></div>
+<p>More details about program and its parameters</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  <span style="color:#0ff;font-weight:bold">`</span>--chuid username<span style="color:#0ff;font-weight:bold">`</span>: <span style="color:#fff;font-weight:bold">set</span> user you want to run program in.
+        (It is best practice <span style="color:#fff;font-weight:bold">if</span> we dont run it with root access)
+  <span style="color:#0ff;font-weight:bold">`</span>--backgroud<span style="color:#0ff;font-weight:bold">`</span>: make program run in background
+  <span style="color:#0ff;font-weight:bold">`</span>--make-pidfile<span style="color:#0ff;font-weight:bold">`</span>: force program to create pidfile
+        (sometime it doesnot work. check document of <span style="color:#0ff;font-weight:bold">`</span>start-stop-daemon<span style="color:#0ff;font-weight:bold">`</span> <span style="color:#fff;font-weight:bold">for</span> more details)
+  <span style="color:#0ff;font-weight:bold">`</span>--pidfile<span style="color:#0ff;font-weight:bold">`</span>: specify pidfile <span style="color:#fff;font-weight:bold">for</span> the program
+  <span style="color:#0ff;font-weight:bold">`</span>$PROGRAM-ARGUMENT<span style="color:#0ff;font-weight:bold">`</span>: is ARGUMENT <span style="color:#fff;font-weight:bold">for</span> the program</code></pre></div>
+<p>Example is with <code>selenium</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SELENIUM_PROGRAM=/usr/bin/java
+SELENIUM_OPTS=<span style="color:#0ff;font-weight:bold">&#34;-jar /home/vagrant/selenium-server-standalone-2.24.1.jar&#34;</span>
+SELENIUM_PID_NAME=selenium
+start-stop-daemon --start --chuid vagrant --make-pidfile --background --pidfile <span style="color:#0ff;font-weight:bold">\
+</span><span style="color:#0ff;font-weight:bold"></span>    /var/run/$SELENIUM_PID_NAME.pid --exec $SELENIUM_PROGRAM -- $SELENIUM_OPTS</code></pre></div>
+<h3 id="2-using-bashscript">2. Using bashscript</h3>
+
+<p>Bashscript also support a method <code>$!</code> to get process id of last command</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; python &amp;
+$&gt; <span style="color:#fff;font-weight:bold">echo</span> $!
+<span style="color:#ff0;font-weight:bold">4035</span></code></pre></div>
+<p>So, if we want to start our <code>selenium</code> server and make pidfile, we can write a script like this</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SELENIUM_PROGRAM=/usr/bin/java
+SELENIUM_OPTS=<span style="color:#0ff;font-weight:bold">&#34;-jar /home/vagrant/selenium-server-standalone-2.24.1.jar&#34;</span>
+SELENIUM_PID_NAME=selenium
+SELENIUM_LOG_FILE=selenium.logfile
+su -c <span style="color:#0ff;font-weight:bold">&#34;</span>$SELENIUM_PROGRAM<span style="color:#0ff;font-weight:bold"> </span>$SELENIUM_OPTS<span style="color:#0ff;font-weight:bold"> 2&gt;&amp;1 &gt;&gt;</span>$SELENIUM_LOG_FILE<span style="color:#0ff;font-weight:bold"> &amp;&#34;</span> vagrant
+PID=$!
+<span style="color:#fff;font-weight:bold">echo</span> $PID &gt; $SELENIUM_PID_NAME.pid</code></pre></div>
+<h3 id="3-stop-process-right-way">3. Stop process right way</h3>
+
+<p>Now, if you want to stop a program which process id was store in <code>pidfile</code>, it quite easy</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#007f7f"># using cat and xargs and kill
+</span><span style="color:#007f7f"></span>$&gt; cat &lt;pidfile&gt; | xargs <span style="color:#fff;font-weight:bold">kill</span>
+
+<span style="color:#007f7f"># using start-stop-daemon tool again
+</span><span style="color:#007f7f"></span>$&gt; start-stop-daemon --stop --pid &lt;pidfile&gt;</code></pre></div>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Run%20program%20in%20UNIX%20and%20make%20pidfile%20for%20it&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f29%2frun-program-and-generate-pid.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f29%2frun-program-and-generate-pid.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f29%2frun-program-and-generate-pid.html&amp;description=Run%20program%20in%20UNIX%20and%20make%20pidfile%20for%20it"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f29%2frun-program-and-generate-pid.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/29\/run-program-and-generate-pid.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

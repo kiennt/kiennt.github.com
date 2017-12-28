@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Server on </title>
+    <link>http://kiennt.com/categories/server/</link>
+    <description>Recent content in Server on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Tue, 09 Jul 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/categories/server/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>apt-get install failed</title>
+      <link>http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html</guid>
+      <description>&lt;p&gt;Today, when setting up my debian server, I get this error&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to deploy a feature branch to heroku</title>
+      <link>http://kiennt.com/blog/2013/03/13/how-to-deploy-a-branch-to-heroku.html</link>
+      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/03/13/how-to-deploy-a-branch-to-heroku.html</guid>
+      <description>&lt;p&gt;We often have many issues/feature which need to fix/enhance/add.&lt;/p&gt;
+
+&lt;p&gt;When developing an feature, we write code in local, the code is not finished.
+But we found out there is a critical bugs in production, and that bug need to fix
+immediately. We will need to deploy a hot fix the bug, but the hot fix should
+not contains the incomplete code we wrote for the new feature.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Giới thiệu về Unix process (vietnamese)</title>
+      <link>http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html</link>
+      <pubDate>Sun, 20 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html</guid>
+      <description>&lt;p&gt;Là một kỹ sư lập trình hệ thống, một server guy, hay là một sys admin, sys dev,
+sys ops,&amp;hellip; phần lớn thời gian bạn sẽ phải làm việc trên hệ thống Unix.
+Để làm việc trên Unix, chúng ta tương tác với hệ điều hành thông qua các
+lệnh (command). Mỗi lệnh trên Unix khi thực thi sẽ run một process hoặc một
+group các processes.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Use `grep` command to find content in Linux</title>
+      <link>http://kiennt.com/blog/2012/07/09/use-grep-to-find-content-in-linux.html</link>
+      <pubDate>Mon, 09 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/07/09/use-grep-to-find-content-in-linux.html</guid>
+      <description>$&amp;gt; grep -r -in &amp;#34;SENTRY&amp;#34; --include=*.py . -R : recursive -in: show line and color &amp;ndash;include: only find files with pattern &amp;ldquo;*.py&amp;rdquo; . : the directory we will find in</description>
+    </item>
+    
+    <item>
+      <title>Watch directory change with Python watchdog library</title>
+      <link>http://kiennt.com/blog/2012/07/05/watch-directiory-change-with-python-watchdog.html</link>
+      <pubDate>Thu, 05 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/07/05/watch-directiory-change-with-python-watchdog.html</guid>
+      <description>&lt;p&gt;Watchdog is Python API and shell utilities to monitor file system events.&lt;/p&gt;
+
+&lt;p&gt;Watchdog come with a tool call &lt;code&gt;watchmedo&lt;/code&gt; to call shell command
+when we get change on a directiory.
+The &amp;ldquo;change&amp;rdquo; include: delete/modify/create a file in directory.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Kill process by name with `awk`</title>
+      <link>http://kiennt.com/blog/2012/07/01/kill-process-by-grep-name-with-awk.html</link>
+      <pubDate>Sun, 01 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/07/01/kill-process-by-grep-name-with-awk.html</guid>
+      <description>$&amp;gt; ps -ef | grep &amp;lt;process_name&amp;gt; | awk &amp;#39;{print $2}&amp;#39; | xargs kill -9</description>
+    </item>
+    
+  </channel>
+</rss>

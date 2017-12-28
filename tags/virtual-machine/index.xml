@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Virtual Machine on </title>
+    <link>http://kiennt.com/tags/virtual-machine/</link>
+    <description>Recent content in Virtual Machine on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Thu, 28 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/virtual-machine/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using vagrant to setup multiple virtual machine</title>
+      <link>http://kiennt.com/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie.html</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/28/using-vagrant-to-setup-multiple-virtual-machie.html</guid>
+      <description>&lt;p&gt;This is another post about using Vagrant to set up development environment
+in your local machine.
+Please consider to read previous post about setup &lt;a href=&#34;http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html&#34;&gt;vagrant&lt;/a&gt; for one VM.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Set up development environment with Vagrant</title>
+      <link>http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html</link>
+      <pubDate>Mon, 18 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/18/install-virtual-machine-with-vagrant.html</guid>
+      <description>&lt;p&gt;When you join a new company, to start to contribute to the code base, you will need
+to set up a development environment on your local machine. Most of the time,
+the team will give you the &lt;code&gt;bootstrap&lt;/code&gt; script to do that. But sometimes, that
+magical script does not exist, and that is the time you know you should introduce
+the team your &lt;code&gt;bootstrap&lt;/code&gt; script. In this article, I shared what I learned
+while building a script by using Vagrant.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

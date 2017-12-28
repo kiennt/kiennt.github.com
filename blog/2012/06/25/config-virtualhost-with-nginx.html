@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/server.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Config virtual host with NGINX in DEBIAN"/>
+<meta name="twitter:description" content="This article, I want to shared what I learn when install a virtual host for
+NGINX in an Debian server.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Config virtual host with NGINX in DEBIAN &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/25/config-virtualhost-with-nginx.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-25T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="server" />
+    
+    
+
+    <title>
+       Config virtual host with NGINX in DEBIAN &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/25/config-virtualhost-with-nginx.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/server.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Config virtual host with NGINX in DEBIAN</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-25T00:00:00Z">
+            Jun 25, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/server/">#server</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>This article, I want to shared what I learn when install a virtual host for
+NGINX in an Debian server.</p>
+
+<p></p>
+
+<h3 id="install-nginx">Install <code>nginx</code></h3>
+
+<p>nginx is fast and lightweight server. In web development <code>nginx</code> mostly was use as web server for static file and reserved proxy.</p>
+
+<p>To install nginx on DEBIAN, using our beloved <strong>apt-get</strong></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; sudo apt-get install nginx</code></pre></div>
+<h3 id="configuration-virtual-host-for-nginx">Configuration virtual host for nginx</h3>
+
+<p>If in our system, we need to server many web application. Eg: port 8212 we server an API serve, on port 8214 we serve web client.</p>
+
+<p>Nginx virtual host is easily to configuration</p>
+
+<p>Firstly, we need to modify /etc/nginx/nginx.conf</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; vim /etc/nginx/nginx.config
+user www-data;            <span style="color:#007f7f"># user which nginx with run at
+</span><span style="color:#007f7f"></span>worker_processes <span style="color:#ff0;font-weight:bold">4</span>;       <span style="color:#007f7f"># number of worker
+</span><span style="color:#007f7f"></span>pid /var/run/nginx.pid;
+
+events {
+    worker_connections <span style="color:#ff0;font-weight:bold">768</span>; <span style="color:#007f7f"># number of connection each worker can handle
+</span><span style="color:#007f7f"></span>}
+
+http {
+    <span style="color:#007f7f"># configuration for TCP
+</span><span style="color:#007f7f"></span>    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout <span style="color:#ff0;font-weight:bold">65</span>;
+    types_hash_max_size <span style="color:#ff0;font-weight:bold">2048</span>;
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    <span style="color:#007f7f"># logfile
+</span><span style="color:#007f7f"></span>    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    <span style="color:#007f7f"># gzip config
+</span><span style="color:#007f7f"></span>    gzip on;
+    gzip_disable <span style="color:#0ff;font-weight:bold">&#34;msie6&#34;</span>;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level <span style="color:#ff0;font-weight:bold">6</span>;
+    gzip_buffers <span style="color:#ff0;font-weight:bold">16</span> 8k;
+    gzip_http_version <span style="color:#ff0;font-weight:bold">1</span>.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    <span style="color:#007f7f"># virtual host
+</span><span style="color:#007f7f"></span>    <span style="color:#007f7f"># this line is importance, we will include all configuration for
+</span><span style="color:#007f7f"></span>    <span style="color:#007f7f">#   each host in folder /etc/nginx/sites-enabled/
+</span><span style="color:#007f7f"></span>    include /etc/nginx/sites-enabled/*;
+}</code></pre></div>
+<p>Now, we create new configuration for a host.
+I often create many configuration file in folder /etc/nginx/site-available,
+and then make soft link to folder /etc/nginx/site-enabled</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; vim /etc/nginx/site-available/contactsync.com
+<span style="color:#007f7f"># name our server
+</span><span style="color:#007f7f"></span>upstream contactsync {
+    server localhost:4444; <span style="color:#007f7f"># in here, we can create many application
+</span><span style="color:#007f7f"></span>                           <span style="color:#007f7f"># instance, but have some paper tell that
+</span><span style="color:#007f7f"></span>                           <span style="color:#007f7f"># we should create number of instance
+</span><span style="color:#007f7f"></span>                           <span style="color:#007f7f"># equal number of CPU core
+</span><span style="color:#007f7f"></span>}
+
+server {
+    listen <span style="color:#ff0;font-weight:bold">80</span>;  <span style="color:#007f7f"># the port server will listen
+</span><span style="color:#007f7f"></span>                <span style="color:#007f7f"># with this config, every request from port 80
+</span><span style="color:#007f7f"></span>                <span style="color:#007f7f"># will redirect to port 4444
+</span><span style="color:#007f7f"></span>
+    <span style="color:#007f7f"># config log file
+</span><span style="color:#007f7f"></span>    access_log /var/log/nginx/contactsync/contactsync.access.log;
+    error_log /var/log/nginx/contactsync/contactsync.error.log;
+
+    <span style="color:#007f7f"># config the proxy
+</span><span style="color:#007f7f"></span>    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+
+        <span style="color:#fff;font-weight:bold">if</span> (!-f $request_filename) {
+            proxy_pass http://contactsync;
+            break;
+        }
+    }
+}
+
+<span style="color:#007f7f"># create soft link
+</span><span style="color:#007f7f"></span>$&gt; ln -s /etc/nginx/site-available/contactsync.com /etc/nginx/enabled/contactsyn.com
+
+<span style="color:#007f7f"># restart nginx to apply
+</span><span style="color:#007f7f"></span>$&gt; /etc/init.d/nginx restart</code></pre></div>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Config%20virtual%20host%20with%20NGINX%20in%20DEBIAN&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f25%2fconfig-virtualhost-with-nginx.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f25%2fconfig-virtualhost-with-nginx.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f25%2fconfig-virtualhost-with-nginx.html&amp;description=Config%20virtual%20host%20with%20NGINX%20in%20DEBIAN"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f25%2fconfig-virtualhost-with-nginx.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/25\/config-virtualhost-with-nginx.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

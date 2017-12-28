@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Postgresql on </title>
+    <link>http://kiennt.com/tags/postgresql/</link>
+    <description>Recent content in Postgresql on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Thu, 28 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Config PostgreSQL database with authentication</title>
+      <link>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</guid>
+      <description>&lt;p&gt;This article is what I learn about config PostgreSQL server and set its
+authentication up.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Start psql without enter password</title>
+      <link>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</link>
+      <pubDate>Wed, 27 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</guid>
+      <description>&lt;p&gt;It &amp;rsquo;s so inconvenience when everytime you want to access &lt;code&gt;psql&lt;/code&gt;, you
+need to enter your &lt;strong&gt;so long&lt;/strong&gt; password&lt;/p&gt;
+
+&lt;p&gt;Today, i learnt how to remove this step by using environment variable
+&lt;code&gt;PGPASSWORD&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

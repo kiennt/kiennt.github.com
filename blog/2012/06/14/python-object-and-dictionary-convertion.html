@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/python-object-and-dictionary-convertion.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Python object and dictionary convertion"/>
+<meta name="twitter:description" content="When programing in Python, sometimes you want to convert an object to
+dictionary and vise versal. In this article, I share my expericences
+to do that.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Python object and dictionary convertion &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/14/python-object-and-dictionary-convertion.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-14T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="python" />
+    
+    <meta property="og:article:tag" content="programming" />
+    
+    
+
+    <title>
+       Python object and dictionary convertion &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/14/python-object-and-dictionary-convertion.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/python-object-and-dictionary-convertion.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Python object and dictionary convertion</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-14T00:00:00Z">
+            Jun 14, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/python/">#python</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/programming/">#programming</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>When programing in Python, sometimes you want to convert an object to
+dictionary and vise versal. In this article, I share my expericences
+to do that.</p>
+
+<p></p>
+
+<h3 id="convert-from-class-to-dictionary">Convert from class to dictionary</h3>
+
+<p>When you want to convert a class to dictionary just define class override from
+object (this is important) and then call method <code>__dict__</code>:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> Person(<span style="color:#fff;font-weight:bold">object</span>):
+        <span style="color:#fff;font-weight:bold">def</span> __init__(self, age, name):
+            self.age = age
+            self.name = name
+&gt;&gt;&gt; a = Person(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;kiennt&#39;</span>, <span style="color:#ff0;font-weight:bold">24</span>)
+&gt;&gt;&gt; a.__dict__
+{ <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;name&#39;</span> : <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;kiennt&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;age&#39;</span> : <span style="color:#ff0;font-weight:bold">24</span> }</code></pre></div>
+<h3 id="convert-from-dictionary-to-class">Convert from dictionary to class</h3>
+
+<p>In contrast, if you want to convert a dictionary to object, use this method.
+I did not invent this method, it is borrowed from <a href="http://stackoverflow.com/a/1305663/126245">stackoverflow.com</a>)</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> Struct(<span style="color:#fff;font-weight:bold">object</span>):
+        <span style="color:#fff;font-weight:bold">def</span> __init__(self, **entries):
+            self.__dict__.update(entries)
+&gt;&gt;&gt; d = { <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;name&#39;</span> : <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;kiennt&#39;</span>, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;age&#39;</span> : <span style="color:#ff0;font-weight:bold">24</span> }
+&gt;&gt;&gt; a = Struct(**d)
+&gt;&gt;&gt; a.name
+<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;kiennt&#34;</span>
+&gt;&gt;&gt; a.age
+<span style="color:#ff0;font-weight:bold">24</span></code></pre></div>
+<p>I change above methods like bellow to get recusive convertion dictionary:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">class</span> Struct(<span style="color:#fff;font-weight:bold">object</span>):
+    <span style="color:#fff;font-weight:bold">def</span> __init__(self, adict):
+        <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;Convert a dictionary to a class
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">        @param :adict Dictionary
+</span><span style="color:#0ff;font-weight:bold">        &#34;&#34;&#34;</span>
+        self.__dict__.update(adict)
+        <span style="color:#fff;font-weight:bold">for</span> k, v in adict.items():
+        <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">isinstance</span>(v, <span style="color:#fff;font-weight:bold">dict</span>):
+            self.__dict__[k] = Struct(v)
+
+<span style="color:#fff;font-weight:bold">def</span> get_object(adict):
+    <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;&#34;&#34;Convert a dictionary to a class
+</span><span style="color:#0ff;font-weight:bold">
+</span><span style="color:#0ff;font-weight:bold">    @param :adict Dictionary
+</span><span style="color:#0ff;font-weight:bold">    @return :class:Struct
+</span><span style="color:#0ff;font-weight:bold">    &#34;&#34;&#34;</span>
+    <span style="color:#fff;font-weight:bold">return</span> Struct(adict)</code></pre></div>
+<p>That &rsquo;s it. Happy working with python!</p>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Python%20object%20and%20dictionary%20convertion&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f14%2fpython-object-and-dictionary-convertion.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f14%2fpython-object-and-dictionary-convertion.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f14%2fpython-object-and-dictionary-convertion.html&amp;description=Python%20object%20and%20dictionary%20convertion"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f14%2fpython-object-and-dictionary-convertion.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/14\/python-object-and-dictionary-convertion.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

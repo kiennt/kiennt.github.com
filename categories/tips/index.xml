@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips on </title>
+    <link>http://kiennt.com/categories/tips/</link>
+    <description>Recent content in Tips on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Tue, 09 Jul 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/categories/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>apt-get install failed</title>
+      <link>http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/07/09/fix-bug-relate-to-debian-apt-get.html</guid>
+      <description>&lt;p&gt;Today, when setting up my debian server, I get this error&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to deploy a feature branch to heroku</title>
+      <link>http://kiennt.com/blog/2013/03/13/how-to-deploy-a-branch-to-heroku.html</link>
+      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/03/13/how-to-deploy-a-branch-to-heroku.html</guid>
+      <description>&lt;p&gt;We often have many issues/feature which need to fix/enhance/add.&lt;/p&gt;
+
+&lt;p&gt;When developing an feature, we write code in local, the code is not finished.
+But we found out there is a critical bugs in production, and that bug need to fix
+immediately. We will need to deploy a hot fix the bug, but the hot fix should
+not contains the incomplete code we wrote for the new feature.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Running celery task synchronous when testing django app</title>
+      <link>http://kiennt.com/blog/2012/11/07/run-celery-task-synchronous-when-testing-django.html</link>
+      <pubDate>Wed, 07 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/11/07/run-celery-task-synchronous-when-testing-django.html</guid>
+      <description>&lt;p&gt;Celery support running task synchronous by config variable &lt;code&gt;CELERY_ALWAYS_EAGER&lt;/code&gt;.
+But where to put this variable? and could I can select run celery task synchronous
+with some testcase?&lt;/p&gt;
+
+&lt;p&gt;I do some googling but did not find any good result. So I post this on my blog
+to help someone like me.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Django show sql query in shell</title>
+      <link>http://kiennt.com/blog/2012/10/25/django-show-sql-query-in-shell.html</link>
+      <pubDate>Thu, 25 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/10/25/django-show-sql-query-in-shell.html</guid>
+      <description>To show sql query in python manage.py shell, we use this code
+import logging l = logging.getLogger(&amp;#39;django.db.backends&amp;#39;) l.setLevel(logging.DEBUG) l.</description>
+    </item>
+    
+    <item>
+      <title>Mysql without password</title>
+      <link>http://kiennt.com/blog/2012/08/03/mysqldump-without-password.html</link>
+      <pubDate>Fri, 03 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/08/03/mysqldump-without-password.html</guid>
+      <description>&lt;p&gt;When dealing with database, sometime we want to make backup database.
+I usually use mysqldump to store all database in sql file.
+The problem is when running, mysqldump ask us to provide password.
+If you must enter password everytime you run the command, you cannot make it run
+automatically with crontab script&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Use `grep` command to find content in Linux</title>
+      <link>http://kiennt.com/blog/2012/07/09/use-grep-to-find-content-in-linux.html</link>
+      <pubDate>Mon, 09 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/07/09/use-grep-to-find-content-in-linux.html</guid>
+      <description>$&amp;gt; grep -r -in &amp;#34;SENTRY&amp;#34; --include=*.py . -R : recursive -in: show line and color &amp;ndash;include: only find files with pattern &amp;ldquo;*.py&amp;rdquo; . : the directory we will find in</description>
+    </item>
+    
+  </channel>
+</rss>

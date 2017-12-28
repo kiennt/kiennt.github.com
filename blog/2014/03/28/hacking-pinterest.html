@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Hacking pinterest android app"/>
+<meta name="twitter:description" content="This article show a way to get private key for Pinterest android app. This article is inspired from this one http://blog.will3942.com/reverse-engineering-instagram. This method was tested on Pinterest app version 2.4.2 and was done from MacOSX.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Hacking pinterest android app &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2014/03/28/hacking-pinterest.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2014-03-28T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="hacking" />
+    
+    
+
+    <title>
+       Hacking pinterest android app &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2014/03/28/hacking-pinterest.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Hacking pinterest android app</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2014-03-28T00:00:00Z">
+            Mar 28, 2014
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/hacking/">#hacking</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>This article show a way to get private key for Pinterest android app. This article is inspired from this one <a href="http://blog.will3942.com/reverse-engineering-instagram">http://blog.will3942.com/reverse-engineering-instagram</a>. This method was tested on Pinterest app version 2.4.2 and was done from MacOSX.</p>
+
+<p></p>
+
+<h2 id="preparation">Preparation</h2>
+
+<ul>
+<li>Download Android SDK from <a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a></li>
+</ul>
+
+<p>Unzip the file we just downloaded. We will see 2 folder: <code>eclipse</code>, <code>sdk</code></p>
+
+<p>In <code>sdk</code> folders, there are <code>build-tools</code>, <code>extras</code>, <code>platform-tools</code>, <code>system-images</code>, <code>tools</code></p>
+
+<p>Modify $PATH environment variable</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f00">$</span>&gt; echo <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;export PATH=$PATH:/DEVELOPMENT/ANDROID/sdk/tools/:/DEVELOPMENT/ANDROID/sdk/platform-tools/:/DEVELOPMENT/ANDROID/sdk/build-tools/android-4.4.2/&#34;</span> &gt;&gt; ~/.bash_profile</code></pre></div>
+<ul>
+<li>Download <a href="https://code.google.com/p/android-apktool/">apktools</a>.</li>
+</ul>
+
+<p>In this article, we tested with Mac OSX 10.8, so we use <a href="http://code.google.com/p/android-apktool/downloads/detail?name=apktool1.5.2.tar.bz2">apktool.1.5.2</a></p>
+
+<ul>
+<li>Set up new android virtual device</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; android avd</code></pre></div>
+<p><img src="http://kiennt.com/images/hacking-pinterest/android-create-image1.png" alt="android-create-image1" />
+  <img src="http://kiennt.com/images/hacking-pinterest/android-create-image2.png" alt="android-create-image2" /></p>
+
+<p>Start new virtual device we just created</p>
+
+<p><img src="http://kiennt.com/images/hacking-pinterest/android-virtual-device.png" alt="android-virtual-device" /></p>
+
+<ul>
+<li>Download pinterest.2.4.2.apk from <a href="http://apkandroid.blogspot.com/2014/02/pinterest-242-apk.html">http://apkandroid.blogspot.com/2014/02/pinterest-242-apk.html</a></li>
+</ul>
+
+<h2 id="hacking">Hacking</h2>
+
+<ul>
+<li>Using apktool to decompile pinterest.2.4.2.apk to smali</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; java -jar /DEVELOPMENT/ANDROID/apktool1.5.2/apktool.jar d pinterest.2.4.2.apk</code></pre></div>
+<p><img src="http://kiennt.com/images/hacking-pinterest/pinterest-smali-folder.png" alt="pinterest-smali" /></p>
+
+<p>All the code will located in <code>smali</code> folder</p>
+
+<p>The code to get private key is located in <code>smali/com/pinterest/base/Application.smali</code></p>
+
+<ul>
+<li>There are 2 function we will need to hack</li>
+</ul>
+
+<p>The first one is <code>getClientID</code> at <code>smali/com/pinterest/base/Application.smali:78</code></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-smali" data-lang="smali">    .method public static final getClientID()Ljava/lang/String;
+        .locals 1
+
+        .prologue
+        .line 268
+        sget-object v0, Lcom/pinterest/api/a;-&gt;d:Ljava/lang/String;
+        return-object v0
+    .end method</code></pre></div>
+<p>We modify it to</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-smali" data-lang="smali">    .method public static final getClientID()Ljava/lang/String;
+        .locals 2
+
+        .prologue
+        .line 268
+        sget-object v0, Lcom/pinterest/api/a;-&gt;d:Ljava/lang/String;
+        const-string v1, &#34;LOGGING: CLIENT ID&#34;
+        invoke-static {v1, v0}, Landroid/util/Log;-&gt;d(Ljava/lang/String;Ljava/lang/String;)I
+
+        return-object v0
+    .end method</code></pre></div>
+<p>NOTE: because we use one more variable v1, so we will need to modify <code>.locals 1</code> to <code>.locals 2</code></p>
+
+<p>The second function is <code>getClientSecret</code> at <code>smali/com/pinterest/base/Application.smali:89</code></p>
+
+<p>We also add a logging to print out the value. Modify <code>.locals 6</code> to <code>.locals 7</code> and modify end of function like this</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-smali" data-lang="smali">    .line 305
+    invoke-virtual {v0}, Ljava/lang/StringBuilder;-&gt;toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    const-string v6, &#34;LOGGING: CLIENT SECRET&#34;
+    invoke-static {v6, v0}, Landroid/util/Log;-&gt;d(Ljava/lang/String;Ljava/lang/String;)I
+
+    goto :goto_0
+.end method</code></pre></div>
+<ul>
+<li>Using apktool to recompile this code</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; java -jar /DEVELOPMENT/ANDROID/apktool1.5.2/apktool.jar b pinterest.2.4.2</code></pre></div>
+<p>The new apk file is located at pinterest.2.4.2/dist/pinterest.2.4.2</p>
+
+<ul>
+<li>Using keytool to generate an key</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; <span style="color:#fff;font-weight:bold">cd</span> pinterest.2.4.2/dist
+  $&gt; keytool -genkey -v -keystore android.keystore -alias android -keyalg RSA -keysize <span style="color:#ff0;font-weight:bold">2048</span> -validity <span style="color:#ff0;font-weight:bold">10000</span></code></pre></div>
+<p>NOTE, we set keystore password and key password is <code>android</code> (<a href="https://developer.android.com/tools/publishing/app-signing.html#setup">https://developer.android.com/tools/publishing/app-signing.html#setup</a>). I am not sure this one is required</p>
+
+<ul>
+<li>Sign new apk app</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android.keystore pinterest.2.4.2.apk android</code></pre></div>
+<ul>
+<li>Verify apk</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; zipalign -f -v <span style="color:#ff0;font-weight:bold">4</span> pinterest.2.4.2.apk pinterest.apk</code></pre></div>
+<ul>
+<li>Install apk app on emulator</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; adb install pinterest.apk</code></pre></div>
+<ul>
+<li>Check log of emulator</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; adb logcat | grep LOGGING</code></pre></div>
+<ul>
+<li>Now in emulator, we only need to start pinterest app</li>
+</ul>
+
+<p>The client ID and client secret will be show in log like this</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    D/LOGGING: CLIENT ID( <span style="color:#ff0;font-weight:bold">1549</span>): <span style="color:#ff0;font-weight:bold">1431602</span>
+    D/LOGGING: CLIENT SECRET( <span style="color:#ff0;font-weight:bold">1549</span>): 492124fd20e80e0f678f7a03344875f9b6234e2b</code></pre></div>
+<h2 id="get-pinterest-algorithm-to-generate-signature">Get pinterest algorithm to generate signature</h2>
+
+<p>After get client id and client secret, I want to know about how  Pinterest generate their signature</p>
+
+<ul>
+<li>Firstly, find out where they code signature generation function</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  $&gt; <span style="color:#fff;font-weight:bold">cd</span> pinterest.2.4.2/smali/com/pinterest
+  $&gt; grep -r <span style="color:#0ff;font-weight:bold">&#34;oauth_signature&#34;</span> .</code></pre></div>
+<p>The file is <code>api/a/i.smali</code></p>
+
+<ul>
+<li>Let look at how pinterest implement there algorithm</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-smali" data-lang="smali">    .method private static a(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Ljava/lang/String;
+        .locals 9
+        .parameter
+        .parameter
+        .parameter
+
+        .prologue
+        const/4 v8, 0x1
+
+        const/4 v7, 0x0
+
+        .line 315
+        .line 317
+        :try_start_0
+        const-string v0, &#34;\\?&#34;
+
+        invoke-virtual {p1, v0}, Ljava/lang/String;-&gt;split(Ljava/lang/String;)[Ljava/lang/String;
+
+        move-result-object v0
+
+        const/4 v1, 0x0
+
+        aget-object v0, v0, v1
+
+        const-string v1, &#34;UTF-8&#34;
+
+        invoke-static {v0, v1}, Ljava/net/URLEncoder;-&gt;encode(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        :try_end_0
+        .catch Ljava/io/UnsupportedEncodingException; {:try_start_0 .. :try_end_0} :catch_1
+
+        move-result-object v0
+
+        .line 322
+        :goto_0
+        new-instance v1, Ljava/lang/StringBuilder;
+
+        invoke-direct {v1}, Ljava/lang/StringBuilder;-&gt;&lt;init&gt;()V
+
+        .line 323
+        invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        move-result-object v2
+
+        const-string v3, &#34;&amp;&#34;
+
+        invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        .line 324
+        invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        move-result-object v0
+
+        const-string v2, &#34;&amp;&#34;
+
+        invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        .line 325
+        invoke-interface {p2}, Ljava/util/Map;-&gt;keySet()Ljava/util/Set;
+
+        move-result-object v0
+
+        invoke-interface {v0}, Ljava/util/Set;-&gt;iterator()Ljava/util/Iterator;
+
+        move-result-object v2
+
+        :cond_0
+        :goto_1
+        invoke-interface {v2}, Ljava/util/Iterator;-&gt;hasNext()Z
+
+        move-result v0
+
+        if-eqz v0, :cond_2
+
+        invoke-interface {v2}, Ljava/util/Iterator;-&gt;next()Ljava/lang/Object;
+
+        move-result-object v3
+
+        .line 327
+        :try_start_1
+        invoke-interface {p2, v3}, Ljava/util/Map;-&gt;get(Ljava/lang/Object;)Ljava/lang/Object;
+
+        move-result-object v0
+
+        .line 328
+        instance-of v4, v0, Ljava/util/List;
+
+        if-eqz v4, :cond_1
+
+        .line 329
+        check-cast v0, Ljava/util/List;
+
+        .line 330
+        invoke-interface {v0}, Ljava/util/List;-&gt;iterator()Ljava/util/Iterator;
+
+        move-result-object v4
+
+        :goto_2
+        invoke-interface {v4}, Ljava/util/Iterator;-&gt;hasNext()Z
+
+        move-result v0
+
+        if-eqz v0, :cond_0
+
+        invoke-interface {v4}, Ljava/util/Iterator;-&gt;next()Ljava/lang/Object;
+
+        move-result-object v0
+
+        check-cast v0, Ljava/lang/String;
+
+        .line 331
+        invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+        move-result-object v5
+
+        const-string v6, &#34;=&#34;
+
+        invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        move-result-object v5
+
+        invoke-static {v0}, Lcom/pinterest/api/a/i;-&gt;c(Ljava/lang/String;)Ljava/lang/String;
+
+        move-result-object v0
+
+        invoke-virtual {v5, v0}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        move-result-object v0
+
+        const-string v5, &#34;&amp;&#34;
+
+        invoke-virtual {v0, v5}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        goto :goto_2
+
+        .line 338
+        :catch_0
+        move-exception v0
+
+        goto :goto_1
+
+        :catch_1
+        move-exception v0
+
+        move-object v0, p1
+
+        goto :goto_0
+
+        .line 334
+        :cond_1
+        invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+        move-result-object v3
+
+        const-string v4, &#34;=&#34;
+
+        invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        move-result-object v3
+
+        check-cast v0, Ljava/lang/String;
+
+        invoke-static {v0}, Lcom/pinterest/api/a/i;-&gt;c(Ljava/lang/String;)Ljava/lang/String;
+
+        move-result-object v0
+
+        invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+        move-result-object v0
+
+        const-string v3, &#34;&amp;&#34;
+
+        invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        :try_end_1
+        .catch Ljava/io/UnsupportedEncodingException; {:try_start_1 .. :try_end_1} :catch_0
+
+        goto :goto_1
+
+        .line 342
+        :cond_2
+        invoke-virtual {v1}, Ljava/lang/StringBuilder;-&gt;toString()Ljava/lang/String;
+
+        move-result-object v0
+
+        invoke-virtual {v1}, Ljava/lang/StringBuilder;-&gt;length()I
+
+        move-result v1
+
+        add-int/lit8 v1, v1, -0x1
+
+        invoke-virtual {v0, v7, v1}, Ljava/lang/String;-&gt;substring(II)Ljava/lang/String;
+
+        move-result-object v1
+
+        .line 343
+        const-string v0, &#34;&#34;
+
+        .line 346
+        :try_start_2
+        new-instance v2, Ljavax/crypto/spec/SecretKeySpec;
+
+        sget-object v3, Lcom/pinterest/api/a;-&gt;f:Ljava/lang/String;
+
+        const-string v4, &#34;UTF-8&#34;
+
+        invoke-virtual {v3, v4}, Ljava/lang/String;-&gt;getBytes(Ljava/lang/String;)[B
+
+        move-result-object v3
+
+        const-string v4, &#34;HMACSHA256&#34;
+
+        invoke-direct {v2, v3, v4}, Ljavax/crypto/spec/SecretKeySpec;-&gt;&lt;init&gt;([BLjava/lang/String;)V
+
+        .line 348
+        const-string v3, &#34;HMACSHA256&#34;
+
+        invoke-static {v3}, Ljavax/crypto/Mac;-&gt;getInstance(Ljava/lang/String;)Ljavax/crypto/Mac;
+
+        move-result-object v3
+
+        .line 349
+        invoke-virtual {v3, v2}, Ljavax/crypto/Mac;-&gt;init(Ljava/security/Key;)V
+
+        .line 350
+        const-string v4, &#34;LOGGING: MESSAGE&#34;
+        invoke-static {v4, v0}, Landroid/util/Log;-&gt;d(Ljava/lang/String;Ljava/lang/String;)I
+        const-string v2, &#34;UTF-8&#34;
+
+        invoke-virtual {v1, v2}, Ljava/lang/String;-&gt;getBytes(Ljava/lang/String;)[B
+
+        move-result-object v1
+
+        invoke-virtual {v3, v1}, Ljavax/crypto/Mac;-&gt;doFinal([B)[B
+
+        move-result-object v1
+
+        .line 351
+        new-instance v2, Ljava/lang/String;
+
+        invoke-static {v1}, Lorg/apache/commons/codec/binary/Hex;-&gt;encodeHex([B)[C
+
+        move-result-object v1
+
+        invoke-direct {v2, v1}, Ljava/lang/String;-&gt;&lt;init&gt;([C)V
+
+        const-string v1, &#34; &#34;
+
+        const-string v3, &#34;&#34;
+
+        invoke-virtual {v2, v1, v3}, Ljava/lang/String;-&gt;replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+        move-result-object v1
+
+        const-string v2, &#34;&lt;&#34;
+
+        const-string v3, &#34;&#34;
+
+        invoke-virtual {v1, v2, v3}, Ljava/lang/String;-&gt;replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+        move-result-object v1
+
+        const-string v2, &#34;&gt;&#34;
+
+        const-string v3, &#34;&#34;
+
+        invoke-virtual {v1, v2, v3}, Ljava/lang/String;-&gt;replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+        :try_end_2
+        .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_2
+
+        move-result-object v0
+
+        .line 357
+        :goto_3
+        const-string v1, &#34;oauth_signature=%s&#34;
+
+        new-array v2, v8, [Ljava/lang/Object;
+
+        aput-object v0, v2, v7
+
+        invoke-static {v1, v2}, Ljava/lang/String;-&gt;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+
+        move-result-object v0
+
+        .line 358
+        const-string v1, &#34;%s&amp;%s&#34;
+
+        const/4 v2, 0x2
+
+        new-array v2, v2, [Ljava/lang/Object;
+
+        aput-object p1, v2, v7
+
+        aput-object v0, v2, v8
+
+        invoke-static {v1, v2}, Ljava/lang/String;-&gt;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+
+        move-result-object v0
+
+        return-object v0
+
+        .line 353
+        :catch_2
+        move-exception v1
+
+        invoke-virtual {v1}, Ljava/lang/Exception;-&gt;printStackTrace()V
+
+        goto :goto_3
+    .end method</code></pre></div>
+<p>From this code, I can only guess they use HMACSHA256 for generate their signature.</p>
+
+<p>They will use CLIENT_SECRET as key for the sha algorithm. We only need to know what they use as message</p>
+
+<p>Search <code>.line 350</code>, this is the message will be pass to sha1 algorithm. Again, we add these two line</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-smali" data-lang="smali">    const-string v4, &#34;LOGGING: MESSAGE&#34;
+    invoke-static {v4, v1}, Landroid/util/Log;-&gt;d(Ljava/lang/String;Ljava/lang/String;)I</code></pre></div>
+<p>This will print for us the format of message Pinterest use.</p>
+
+<p>Now run the pinterest app again, we will see the format of that message</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  POST&amp;https%3A%2F%2Fapi.pinterest.com%2Fv3%2Flogin%2F&amp;client_id=<span style="color:#ff0;font-weight:bold">1431602</span>&amp;password=k×tamp=<span style="color:#ff0;font-weight:bold">1395914520</span>&amp;username_or_email=trungkien2288%40gmail.com</code></pre></div>
+<p>Here is the code I use to simulate request in python</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#fff;font-weight:bold">import</span> unittest
+    <span style="color:#fff;font-weight:bold">import</span> urllib
+    <span style="color:#fff;font-weight:bold">import</span> hashlib
+    <span style="color:#fff;font-weight:bold">import</span> hmac
+
+    client_secret = <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;492124fd20e80e0f678f7a03344875f9b6234e2b&#39;</span>
+    client_id = <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;1431602&#39;</span>
+
+
+    <span style="color:#fff;font-weight:bold">def</span> generate_signature(method, url, data):
+        data[<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;client_id&#39;</span>] = client_id
+        sorted_keys = <span style="color:#fff;font-weight:bold">sorted</span>(data.keys())
+        message = <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;&amp;&#39;</span>.join([<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">=</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">&#34;</span> % (k, urllib.quote_plus(data[k])) <span style="color:#fff;font-weight:bold">for</span> k in sorted_keys])
+        message = <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">&amp;</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">&amp;</span><span style="color:#0ff;font-weight:bold">%s</span><span style="color:#0ff;font-weight:bold">&#34;</span> % (method.upper(), urllib.quote_plus(url), message)
+        signature = hmac.new(client_secret, message.encode(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;utf-8&#39;</span>), hashlib.sha256).hexdigest()
+        <span style="color:#fff;font-weight:bold">return</span> signature
+
+
+    <span style="color:#fff;font-weight:bold">class</span> TestCase(unittest.TestCase):
+
+        <span style="color:#fff;font-weight:bold">def</span> test_generate_signature_1(self):
+            data = {
+                <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;username_or_email&#39;</span>: <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;trungkien2288@gmail.com&#39;</span>,
+                <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;password&#39;</span>: <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;k&#39;</span>,
+                <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;timestamp&#39;</span>: <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;1395914520&#39;</span>
+            }
+            url = <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;https://api.pinterest.com/v3/login/&#39;</span>
+
+            signature = generate_signature(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;POST&#34;</span>, url, data)
+            self.assertEquals(signature, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;6ee35c775b5f92668530d9cc2b91d9380c4bf01f1b17ccfa73ecfd2867b7b562&#39;</span>)
+
+        <span style="color:#fff;font-weight:bold">def</span> test_generate_signature_2(self):
+            data = {
+                <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;timestamp&#39;</span>: <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;1395914294&#39;</span>
+            }
+            url = <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;https://api.pinterest.com/v3/callback/post_install/&#39;</span>
+
+            signature = generate_signature(<span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#34;GET&#34;</span>, url, data)
+            self.assertEquals(signature, <span style="color:#0ff;font-weight:bold"></span><span style="color:#0ff;font-weight:bold">&#39;0783e2deb355326bb998876387445f2d20bafefc930762cb216e4bc6a2ed748e&#39;</span>)</code></pre></div>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Hacking%20pinterest%20android%20app&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2014%2f03%2f28%2fhacking-pinterest.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2014%2f03%2f28%2fhacking-pinterest.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2014%2f03%2f28%2fhacking-pinterest.html&amp;description=Hacking%20pinterest%20android%20app"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2014%2f03%2f28%2fhacking-pinterest.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2014\/03\/28\/hacking-pinterest.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

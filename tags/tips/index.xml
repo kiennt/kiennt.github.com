@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tips on </title>
+    <link>http://kiennt.com/tags/tips/</link>
+    <description>Recent content in Tips on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Fri, 29 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Run program in UNIX and make pidfile for it</title>
+      <link>http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html</link>
+      <pubDate>Fri, 29 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/29/run-program-and-generate-pid.html</guid>
+      <description>&lt;p&gt;We sometime want to run a program and after than stop it.&lt;/p&gt;
+
+&lt;p&gt;For example, at boot time, we start an &lt;a href=&#34;http://kiennt.com/blog/2012/06/29/using-selenium-with-headless-browser.html&#34;&gt;selenium&lt;/a&gt;.
+But after that, we want to stop it.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Config PostgreSQL database with authentication</title>
+      <link>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</link>
+      <pubDate>Thu, 28 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/28/config-postgresql-database-with-authentication.html</guid>
+      <description>&lt;p&gt;This article is what I learn about config PostgreSQL server and set its
+authentication up.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Start psql without enter password</title>
+      <link>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</link>
+      <pubDate>Wed, 27 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/27/start-psql-without-enter-your-password.html</guid>
+      <description>&lt;p&gt;It &amp;rsquo;s so inconvenience when everytime you want to access &lt;code&gt;psql&lt;/code&gt;, you
+need to enter your &lt;strong&gt;so long&lt;/strong&gt; password&lt;/p&gt;
+
+&lt;p&gt;Today, i learnt how to remove this step by using environment variable
+&lt;code&gt;PGPASSWORD&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fabric run remote with specify user on a hostname</title>
+      <link>http://kiennt.com/blog/2012/06/22/fabric-run-with-specify-user.html</link>
+      <pubDate>Fri, 22 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/22/fabric-run-with-specify-user.html</guid>
+      <description>&lt;p&gt;A little snippet to run fabric under specify user with ssh config:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac OSX Lion with 2D Dock</title>
+      <link>http://kiennt.com/blog/2012/06/21/macosx-2d-dock.html</link>
+      <pubDate>Thu, 21 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/21/macosx-2d-dock.html</guid>
+      <description>&lt;p&gt;Dock in MacOSX Lion is cool, but i like simplicity. I dont like 3D Dock, and prefer 2D Dock.
+In MacOSX Lion, to disable 3D effect on Dock, i do by followed step&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en-ES">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+
+
+    
+        
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:image" content="http://kiennt.com/images/post/startup.jpg"/>
+    
+
+
+
+<meta name="twitter:title" content="Add new startup items on Mac OSX"/>
+<meta name="twitter:description" content="In DEBIAN, when we want to add new start up item, we create new script file in
+/etc/init.d and using update-rc.d to add it.
+But in Mac OSX, there is not /etc/init.d and update-rc.d anymore.
+
+"/>
+
+    <meta name="twitter:site" content="@kiennt"/>
+
+
+
+  	<meta property="og:title" content=" Add new startup items on Mac OSX &middot;  " />
+  	<meta property="og:site_name" content="" />
+  	<meta property="og:url" content="http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html" />
+
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2012-06-27T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="server" />
+    
+    <meta property="og:article:tag" content="booting" />
+    
+    <meta property="og:article:tag" content="macosx" />
+    
+    
+
+    <title>
+       Add new startup items on Mac OSX &middot;  
+    </title>
+
+    <meta name="description" content="Hapiness is love what you do" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="http://kiennt.com/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="http://kiennt.com/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="http://kiennt.com/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Avenir next:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="http://kiennt.com/index.xml" rel="alternate" type="application/rss+xml" title="" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.31.1" />
+
+    <link rel="canonical" href="http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html" />
+
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-16274581-6', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+    </ul>
+    
+    
+    <a class="subscribe-button icon-feed" href="http://kiennt.com/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+  
+  <header class="main-header post-head" style="background-image: url(http://kiennt.com/images/post/startup.jpg)">
+  
+  <nav class="main-nav overlay clearfix">
+
+
+  
+      <a class="blog-logo" href="http://kiennt.com/"><img src="http://kiennt.com/images/kiennt.jpg" alt="Home" /></a>
+  
+  
+      <a class="menu-button icon-feed" href="http://kiennt.com/index.xml">&nbsp;&nbsp;Subscribe</a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Add new startup items on Mac OSX</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2012-06-27T00:00:00Z">
+            Jun 27, 2012
+          </time>
+        
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/server/">#server</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/booting/">#booting</a></span>
+         
+          <span class="post-tag small"><a href="http://kiennt.com/tags/macosx/">#macosx</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p>In DEBIAN, when we want to add new start up item, we create new script file in
+/etc/init.d and using update-rc.d to add it.
+But in Mac OSX, there is not /etc/init.d and update-rc.d anymore.</p>
+
+<p></p>
+
+<h3 id="booting-in-mac-osx">Booting in Mac OSX</h3>
+
+<p>When the computer is powered up, the firmware is complete control.
+After the firmware initializes the hardware, it hands off control the BootX loader.
+BootX locate in <strong>/System/Library/CoreSerives</strong>. It draws the Apple logo on the screen and proceeds to setup the kernel environment.
+BootX first looks for kernel extension (drivers, also known as kexts) that are cached in the <strong>mkext cache</strong>. If the cache does not exits, BootX loads only those extensions in <strong>/System/Library/Extensions</strong> that have <em>OSBundleRequired</em> key in their Info.plist file.
+Each extension live in folder (<em>ExtensionName.kext</em>) and the Info.plist file is an XML document that resides in its Contents subfolder.</p>
+
+<p>After the required drivers are loaded, BootX hands off control to the kernel (/mach_kernel).</p>
+
+<p>The kernel first initializes all the data structures needed to support Mach and BSD. Next, it initializes the I/O Kit, which connects the kernel with the set of extensions that correspond to the machine&rsquo;s hardware configuration. Then, the kernel finds and mounts the root filesystem. The kernel next loads mach_init, which starts Mach message handling. mach_init then launches the BSD init process. In keeping with Unix conventions, init is process ID (PID) 1, even though it was started second. mach_init is given PID 2, and its parent PID is set to 1 (init&rsquo;s PID).</p>
+
+<p>The init process launches the /etc/rc.boot and /etc/rc shell scripts to start the system. Both rc scripts (and all startup items) source the /etc/rc.common script, which sets the initial environment, defines some useful functions, and loads the /etc/hostconfig file. /etc/hostconfig controls which system services need to be started and defines such things as the AppleTalk hostname. Example 2-2 is an excerpt from the hostconfig file.</p>
+
+<p>SystemStarter examines <strong>/System/Library/StartupItems</strong> and <strong>/Library/StartupItems</strong> for applications that should be started at boot time. <strong>/Library/StartupItems</strong> contains items for locally installed applications; you can also put your own custom startup items there. <strong>/System/Library/StartupItems</strong> contains items for the system. You should not modify these or add your own items here.</p>
+
+<h2 id="add-new-startup-script-on-system-library-startupitems">Add new startup script on <code>/System/Library/StartupItems</code></h2>
+
+<p>To add new script on startup, for example, we want to start my virtual machine VirtualBox at startup.</p>
+
+<p>Firstly, in need to create new folder name VirtualBox in <strong>/System/Library/StartupItems</strong>, and in this folder we create 2 files: <strong>StartupParameters.plist</strong> and <strong>VirtualBox</strong> (same name with folder name).</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; sudo mkdir -p /System/Library/StartupItems/VirtualBox
+$&gt; sudo touch /System/Library/StartupItems/VirtualBox/VirtualBox
+$&gt; sudo chmod +x /System/Library/StartupItems/VirtualBox/VirtualBox
+$&gt; sudo touch /System/Library/StartupItems/VirtualBox/StartupParameters.plist
+
+<span style="color:#007f7f"># modify contents of StartuParameters.plist
+</span><span style="color:#007f7f"># `Description` is description about this program
+</span><span style="color:#007f7f"># `Provides`  This is an array of services that the item provides (
+</span><span style="color:#007f7f">#             for example, Apache provides Web#   Server).
+</span><span style="color:#007f7f">#             These services should be globally unique.
+</span><span style="color:#007f7f">#             In the event that SystemStarter finds two items that
+</span><span style="color:#007f7f">#             provide the same service, it will start the first one it finds.
+</span><span style="color:#007f7f"># `Requires`  This is an array of services that the item depends on.
+</span><span style="color:#007f7f">#             It should correspond to another item&#39;s Provides attribute.
+</span><span style="color:#007f7f">#             If a required service cannot be started, the system won&#39;t start the item.
+</span><span style="color:#007f7f"># `Uses`      This is similar to Requires, but it is a weaker association.
+</span><span style="color:#007f7f">#             If SystemStarter can find a matching service, it will start it.
+</span><span style="color:#007f7f">#             If it can&#39;t, the dependent item will still start.
+</span><span style="color:#007f7f"># `OrderPreference` The Requires and Uses attributes imply a particular
+</span><span style="color:#007f7f">#             order, in that dependent items will be started after the
+</span><span style="color:#007f7f">#             services they depend on. You can specify First, Early, None
+</span><span style="color:#007f7f">#             (the default), Late, or Last here. SystemStarter will do its
+</span><span style="color:#007f7f">#             best to satisfy this preference, but dependency orders prevail.
+</span><span style="color:#007f7f"></span>$&gt; sudo vim /System/Library/StartupItems/VirtualBox/StartupParameters.plist
+{
+    Description     = <span style="color:#0ff;font-weight:bold">&#34;VirtualBox Support and USB Drivers&#34;</span>;
+    Provides        = (<span style="color:#0ff;font-weight:bold">&#34;VirtualBox&#34;</span>);
+    OrderPreference = <span style="color:#0ff;font-weight:bold">&#34;None&#34;</span>;
+}
+
+<span style="color:#007f7f"># modify contents of VirtualBox
+</span><span style="color:#007f7f"></span>$&gt; sudo vim /System/Library/StartupItems/VirtualBox/VirtualBox
+<span style="color:#0f0;font-weight:bold">#!/usr/bin/env sh
+</span><span style="color:#0f0;font-weight:bold"></span>. /etc/rc.common
+
+StartService()
+{
+    <span style="color:#007f7f"># your function in here
+</span><span style="color:#007f7f"></span>}
+
+StopService()
+{
+    <span style="color:#007f7f"># your function in here
+</span><span style="color:#007f7f"></span>}
+
+RestartService()
+{
+    <span style="color:#007f7f"># your function in here
+</span><span style="color:#007f7f"></span>}
+RunService <span style="color:#0ff;font-weight:bold">&#34;</span>$1<span style="color:#0ff;font-weight:bold">&#34;</span></code></pre></div>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="http://kiennt.com/" style="background-image: url(http://kiennt.com/images/kiennt.jpg)"><span class="hidden">Kien Nguyen's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+<section class="author">
+  <h4><a href="http://kiennt.com/">Kien Nguyen Trung</a></h4>
+  
+  <p>A father, husband and Elixir lover.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Ho Chi Minh, Vietnam</span>
+    <span class="author-link icon-link"><a href="http://kiennt.com">http://kiennt.com</a></span>
+  </div>
+</section>
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Add%20new%20startup%20items%20on%20Mac%20OSX&nbsp;-&nbsp;&amp;url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f27%2fadd-new-startup-items-on-mac-osx.html"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f27%2fadd-new-startup-items-on-mac-osx.html"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f27%2fadd-new-startup-items-on-mac-osx.html&amp;description=Add%20new%20startup%20items%20on%20Mac%20OSX"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=http%3a%2f%2fkiennt.com%2fblog%2f2012%2f06%2f27%2fadd-new-startup-items-on-mac-osx.html"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'kntheroku';
+  var disqus_url = 'http:\/\/kiennt.com\/blog\/2012\/06\/27\/add-new-startup-items-on-mac-osx.html';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href=""></a> 2017</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="http://kiennt.com/js/index.js"></script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">
+    require(["mojo/signup-forms/Loader"], function (L) {
+        L.start({
+            "baseUrl": "mc.us10.list-manage.com",
+            "uuid": "68bf431653b457bf2e2b39a4c",
+            "lid": "f753e974c9"
+        })
+    })
+</script>
+    
+</body>
+</html>
+

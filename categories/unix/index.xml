@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unix on </title>
+    <link>http://kiennt.com/categories/unix/</link>
+    <description>Recent content in Unix on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Sun, 20 Jan 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/categories/unix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Giới thiệu về Unix process (vietnamese)</title>
+      <link>http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html</link>
+      <pubDate>Sun, 20 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2013/01/20/introduction-to-unix-process.html</guid>
+      <description>&lt;p&gt;Là một kỹ sư lập trình hệ thống, một server guy, hay là một sys admin, sys dev,
+sys ops,&amp;hellip; phần lớn thời gian bạn sẽ phải làm việc trên hệ thống Unix.
+Để làm việc trên Unix, chúng ta tương tác với hệ điều hành thông qua các
+lệnh (command). Mỗi lệnh trên Unix khi thực thi sẽ run một process hoặc một
+group các processes.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

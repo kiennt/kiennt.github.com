@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Macosx on </title>
+    <link>http://kiennt.com/tags/macosx/</link>
+    <description>Recent content in Macosx on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ES</language>
+    <copyright>2017</copyright>
+    <lastBuildDate>Wed, 27 Jun 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://kiennt.com/tags/macosx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Add new startup items on Mac OSX</title>
+      <link>http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html</link>
+      <pubDate>Wed, 27 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://kiennt.com/blog/2012/06/27/add-new-startup-items-on-mac-osx.html</guid>
+      <description>&lt;p&gt;In DEBIAN, when we want to add new start up item, we create new script file in
+/etc/init.d and using update-rc.d to add it.
+But in Mac OSX, there is not /etc/init.d and update-rc.d anymore.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
